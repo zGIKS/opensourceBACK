@@ -2,6 +2,19 @@
 
 package "Design Lab Bounded Context" {
 
+    package "Application Layer" {
+        class ProjectCommandServiceImpl {
+        }
+        class ProjectQueryServiceImpl {
+        }
+
+    }
+
+    package "Infrastructure Layer" {
+        interface ProjectRepository {
+        }
+    }
+
     package "Domain Layer" {
 
         package "Services" {
@@ -106,5 +119,8 @@ package "Design Lab Bounded Context" {
 
         Project "1" *-- "0..*" Layer : contains >
     }
+
+    ProjectCommandServiceImpl ..|> ProjectCommandService
+    ProjectQueryServiceImpl ..|> ProjectQueryService
 }
 @enduml
