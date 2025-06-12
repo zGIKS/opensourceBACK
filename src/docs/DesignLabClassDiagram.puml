@@ -2,12 +2,15 @@
 
 package "Design Lab Bounded Context" {
 
-    package "Application Layer" {
-        class ProjectCommandServiceImpl {
-        }
-        class ProjectQueryServiceImpl {
-        }
+    package "Interfaces Layer" {
+        class ProjectResource {}
+        class ProjectResourceFromEntityAssembler {}
+        class ProjectController {}
+    }
 
+    package "Application Layer" {
+        class ProjectCommandServiceImpl {}
+        class ProjectQueryServiceImpl {}
     }
 
     package "Infrastructure Layer" {
@@ -122,5 +125,8 @@ package "Design Lab Bounded Context" {
 
     ProjectCommandServiceImpl ..|> ProjectCommandService
     ProjectQueryServiceImpl ..|> ProjectQueryService
+    ProjectController -down-> ProjectResource : uses >
+    ProjectController --> ProjectCommandService
+
 }
 @enduml
