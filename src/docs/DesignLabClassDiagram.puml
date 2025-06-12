@@ -28,54 +28,62 @@ package "Design Lab Bounded Context" {
             }
         }
 
-        enum ProjectStatus {
-            Blueprint
-            Garment
-            Template
-        }
+        package "Value Objects" {
+            enum ProjectStatus {
+                Blueprint
+                Garment
+                Template
+            }
 
-        enum GarmentGender {
-            MEN
-            WOMEN
-            UNISEX
-            KIDS
-        }
+            enum GarmentGender {
+                MEN
+                WOMEN
+                UNISEX
+                KIDS
+            }
 
-        enum GarmentSize {
-            XS
-            S
-            M
-            L
-            XL
-            XXL
-        }
+            enum GarmentSize {
+                XS
+                S
+                M
+                L
+                XL
+                XXL
+            }
 
-        enum LayerType {
-            IMAGE
-            TEXT
-        }
+            enum LayerType {
+                IMAGE
+                TEXT
+            }
 
-        enum GarmentColor {
-            BLACK
-            GRAY
-            LIGHT_GRAY
-            WHITE
-            RED
-            PINK
-            LIGHT_PURPLE
-            PURPLE
-            LIGHT_BLUE
-            CYAN
-            SKY_BLUE
-            BLUE
-            GREEN
-            LIGHT_GREEN
-            YELLOW
-            DARK_YELLOW
+            enum GarmentColor {
+                BLACK
+                GRAY
+                LIGHT_GRAY
+                WHITE
+                RED
+                PINK
+                LIGHT_PURPLE
+                PURPLE
+                LIGHT_BLUE
+                CYAN
+                SKY_BLUE
+                BLUE
+                GREEN
+                LIGHT_GREEN
+                YELLOW
+                DARK_YELLOW
+                ---
+                EGarmentColor Value
+                String ToHexCode()
+            }
 
-            ---
-            EGarmentColor Value
-            String ToHexCode()
+            class ProjectId {
+                UUID value
+            }
+            class UserId {
+                UUID value
+            }
         }
 
         class "Project" {
@@ -122,6 +130,14 @@ package "Design Lab Bounded Context" {
 
         Project "1" *-- "0..*" Layer : contains >
     }
+    Project --> ProjectId
+    Project --> UserId
+    Project --> GarmentColor
+    Project --> GarmentSize
+    Project --> ProjectStatus
+    Project --> GarmentGender
+
+    Layer --> LayerType
 
     ProjectCommandServiceImpl ..|> ProjectCommandService
     ProjectQueryServiceImpl ..|> ProjectQueryService
