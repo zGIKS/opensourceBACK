@@ -4,6 +4,14 @@ package "Design Lab Bounded Context" {
 
     package "Domain Layer" {
 
+        package "Services" {
+            interface ProjectCommandService {
+            }
+
+            interface ProjectQueryService {
+            }
+        }
+
         enum ProjectStatus {
             Blueprint
             Garment
