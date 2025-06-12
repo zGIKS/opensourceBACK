@@ -2,56 +2,88 @@
 
 package "Design Lab Bounded Context" {
 
+    package "Interfaces Layer" {
+        class ProjectResource {}
+        class ProjectResourceFromEntityAssembler {}
+        class ProjectController {}
+    }
+
+    package "Application Layer" {
+        class ProjectCommandServiceImpl {}
+        class ProjectQueryServiceImpl {}
+    }
+
+    package "Infrastructure Layer" {
+        interface ProjectRepository {
+        }
+    }
+
     package "Domain Layer" {
 
-        enum ProjectStatus {
-            Blueprint
-            Garment
-            Template
+        package "Services" {
+            interface ProjectCommandService {
+            }
+
+            interface ProjectQueryService {
+            }
         }
 
-        enum GarmentGender {
-            MEN
-            WOMEN
-            UNISEX
-            KIDS
-        }
+        package "Value Objects" {
+            enum ProjectStatus {
+                Blueprint
+                Garment
+                Template
+            }
 
-        enum GarmentSize {
-            XS
-            S
-            M
-            L
-            XL
-            XXL
-        }
+            enum GarmentGender {
+                MEN
+                WOMEN
+                UNISEX
+                KIDS
+            }
 
-        enum LayerType {
-            IMAGE
-            TEXT
-        }
+            enum GarmentSize {
+                XS
+                S
+                M
+                L
+                XL
+                XXL
+            }
 
-        enum GarmentColor {
-            BLACK
-            GRAY
-            LIGHT_GRAY
-            WHITE
-            RED
-            PINK
-            LIGHT_PURPLE
-            PURPLE
-            LIGHT_BLUE
-            CYAN
-            SKY_BLUE
-            BLUE
-            GREEN
-            LIGHT_GREEN
-            YELLOW
-            DARK_YELLOW
+            enum LayerType {
+                IMAGE
+                TEXT
+            }
 
-            ---
-            EGarmentColor Value
-            String ToHexCode()
+            enum GarmentColor {
+                BLACK
+                GRAY
+                LIGHT_GRAY
+                WHITE
+                RED
+                PINK
+                LIGHT_PURPLE
+                PURPLE
+                LIGHT_BLUE
+                CYAN
+                SKY_BLUE
+                BLUE
+                GREEN
+                LIGHT_GREEN
+                YELLOW
+                DARK_YELLOW
+                ---
+                EGarmentColor Value
+                String ToHexCode()
+            }
+
+            class ProjectId {
+                UUID value
+            }
+            class UserId {
+                UUID value
+            }
         }
 
         class "Project" {
@@ -98,5 +130,19 @@ package "Design Lab Bounded Context" {
 
         Project "1" *-- "0..*" Layer : contains >
     }
+    Project --> ProjectId
+    Project --> UserId
+    Project --> GarmentColor
+    Project --> GarmentSize
+    Project --> ProjectStatus
+    Project --> GarmentGender
+
+    Layer --> LayerType
+
+    ProjectCommandServiceImpl ..|> ProjectCommandService
+    ProjectQueryServiceImpl ..|> ProjectQueryService
+    ProjectController -down-> ProjectResource : uses >
+    ProjectController --> ProjectCommandService
+
 }
 @enduml
