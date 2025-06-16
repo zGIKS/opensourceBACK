@@ -1,12 +1,11 @@
-package quri.teelab.api.teelab.designlab.model.aggregates;
+package quri.teelab.api.teelab.designlab.domain.model.aggregates;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 import org.hibernate.validator.constraints.URL;
-import quri.teelab.api.teelab.designlab.model.entities.Layer;
-import quri.teelab.api.teelab.designlab.model.valueobjects.ProjectId;
-import quri.teelab.api.teelab.designlab.model.valueobjects.ProjectStatus;
-import quri.teelab.api.teelab.designlab.model.valueobjects.UserId;
+import quri.teelab.api.teelab.designlab.domain.model.entities.Layer;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectStatus;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 
 import java.util.ArrayList;
 import java.util.Date;

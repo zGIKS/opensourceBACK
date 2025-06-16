@@ -1,4 +1,4 @@
-package quri.teelab.api.teelab.designlab.model.valueobjects;
+package quri.teelab.api.teelab.designlab.domain.model.valueobjects;
 
 public enum GarmentColor {
 

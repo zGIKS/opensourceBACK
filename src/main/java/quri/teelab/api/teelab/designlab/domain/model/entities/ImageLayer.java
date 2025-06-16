@@ -1,4 +1,4 @@
-package quri.teelab.api.teelab.designlab.model.entities;
+package quri.teelab.api.teelab.designlab.domain.model.entities;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
