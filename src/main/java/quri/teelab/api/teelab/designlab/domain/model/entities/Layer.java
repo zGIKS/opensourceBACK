@@ -1,9 +1,9 @@
-package quri.teelab.api.teelab.designlab.model.entities;
+package quri.teelab.api.teelab.designlab.domain.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import quri.teelab.api.teelab.designlab.model.valueobjects.LayerId;
-import quri.teelab.api.teelab.designlab.model.valueobjects.LayerType;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerType;
 
 import java.util.Date;
 
