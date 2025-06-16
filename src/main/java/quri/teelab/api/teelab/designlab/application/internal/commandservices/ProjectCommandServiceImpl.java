@@ -1,9 +1,10 @@
 package quri.teelab.api.teelab.designlab.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
+import quri.teelab.api.teelab.designlab.domain.model.aggregates.Project;
 import quri.teelab.api.teelab.designlab.domain.model.commands.DeleteProjectLayerCommand;
-import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectCommandService;
+import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.LayerRepository;
 import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.ProjectRepository;
 
 import java.util.UUID;
@@ -11,26 +12,35 @@ import java.util.UUID;
 @Service
 public class ProjectCommandServiceImpl implements ProjectCommandService {
     private final ProjectRepository projectRepository;
+    private final LayerRepository layerRepository;
 
-    public ProjectCommandServiceImpl(ProjectRepository projectRepository) {
+    public ProjectCommandServiceImpl(ProjectRepository projectRepository, LayerRepository layerRepository) {
         this.projectRepository = projectRepository;
+        this.layerRepository = layerRepository;
     }
 
     @Override
     public UUID handle(DeleteProjectLayerCommand command) {
+        if (!layerRepository.existsById(command.layerId())) {
+            throw new IllegalArgumentException("Layer with ID " + command.layerId() + " does not exist.");
+        }
 
-        // TODO: Check this with the teacher if this is the correct way to handle the command
-        if (!projectRepository.existsById(command.projectId())) {
+        var result = projectRepository.findById(command.projectId());
+
+        if (result.isEmpty()) {
             throw new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist.");
         }
 
+        var project = result.get();
         try {
-            // TODO: Implement the logic to delete the project layer
-            // projectRepository.deleteById(command.projectId());
+            if (project.hasLayerWithId(command.layerId())) {
+                // TODO: Ask if we should delete the layer from the project or just remove it from the repository
+                layerRepository.deleteById(command.layerId());
+                return command.layerId();
+            }
+            throw new IllegalArgumentException("Project with ID " + command.projectId() + " does not have a layer with ID " + command.layerId() + ".");
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete project with ID " + command.projectId(), e);
         }
-
-        return command.projectId();
     }
 }
