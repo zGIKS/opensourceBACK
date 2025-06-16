@@ -4,11 +4,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "quri.teelab.api")
 public class TeeLabApplication {
 
     public static void main(String[] args) {
-        // Cargar variables de entorno desde .env antes de iniciar Spring Boot
+        // Load environment variables from .env before starting Spring Boot
         try {
             io.github.cdimascio.dotenv.Dotenv dotenv = io.github.cdimascio.dotenv.Dotenv.configure()
                 .directory("src/main/resources")
@@ -21,9 +21,12 @@ public class TeeLabApplication {
                 }
             });
         } catch (Exception e) {
-            System.err.println("No se pudo cargar el archivo .env: " + e.getMessage());
+            System.err.println("Could not load .env file: " + e.getMessage());
         }
         SpringApplication.run(TeeLabApplication.class, args);
+        System.out.println("\n----------------------------------------------------------");
+        System.out.println("Swagger UI available at: http://localhost:8080/swagger-ui/index.html");
+        System.out.println("----------------------------------------------------------\n");
     }
 
 }
