@@ -40,7 +40,7 @@ public class Project {
     private Date updatedAt;
 
     // Default constructor required by JPA
-    private Project() {}
+    public Project() {}
 
     // Business methods
     public void addLayer(Layer layer) {
