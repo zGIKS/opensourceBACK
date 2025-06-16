@@ -11,11 +11,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/projects", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Projects", description = "Available Project Endpoints")
-public class ProjectController {
+public class ProjectsController {
     private final ProjectCommandService projectCommandService;
     private final ProjectQueryService projectQueryService;
 
-    public ProjectController(ProjectCommandService projectCommandService, ProjectQueryService projectQueryService) {
+    public ProjectsController(ProjectCommandService projectCommandService, ProjectQueryService projectQueryService) {
         this.projectCommandService = projectCommandService;
         this.projectQueryService = projectQueryService;
     }
