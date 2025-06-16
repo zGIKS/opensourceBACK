@@ -1,8 +1,13 @@
 package quri.teelab.api.teelab.designlab.model.entities;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import org.hibernate.validator.constraints.URL;
 
+@Entity
+@DiscriminatorValue("IMAGE")
+@Getter
 public class ImageLayer extends Layer {
     @Getter
     @URL

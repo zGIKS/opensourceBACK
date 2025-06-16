@@ -1,34 +1,54 @@
 package quri.teelab.api.teelab.designlab.model.aggregates;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.validator.constraints.URL;
 import quri.teelab.api.teelab.designlab.model.entities.Layer;
 import quri.teelab.api.teelab.designlab.model.valueobjects.ProjectId;
+import quri.teelab.api.teelab.designlab.model.valueobjects.ProjectStatus;
 import quri.teelab.api.teelab.designlab.model.valueobjects.UserId;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-@Getter
 @Entity
+@Table(name = "projects")
 public class Project {
-    @Id
-    @Getter
+    @EmbeddedId
     private ProjectId id;
 
-    @Getter
     private String title;
 
-    @Getter
     @Embedded
     private UserId userId;
 
-    @Getter
     @URL
     private String previewUrl;
 
-    private List<Layer> layers;
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private List<Layer> layers = new ArrayList<>();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    // Default constructor required by JPA
+    private Project() {}
+
+    // Business methods
+    public void addLayer(Layer layer) {
+        this.layers.add(layer);
+    }
+
+    public void removeLayer(Layer layer) {
+        this.layers.remove(layer);
+    }
 
 }
