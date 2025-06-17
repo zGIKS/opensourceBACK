@@ -2,6 +2,7 @@ package quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfillmentCommand;
 import quri.teelab.api.teelab.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
 import java.util.Date;
@@ -10,14 +11,13 @@ import java.util.Date;
 @Entity
 @Table(name = "fulfillments")
 public class Fulfillment extends AuditableAbstractAggregateRoot<Fulfillment> {
-    
-    @Column(name = "order_id", nullable = false)
+      @Column(name = "order_id", nullable = false)
     private String orderId;
     
     @Column(name = "status", nullable = false)
     private String status;
     
-    @Column(name = "received_date", nullable = false)
+    @Column(name = "received_date", nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date receivedDate;
     
@@ -26,8 +26,7 @@ public class Fulfillment extends AuditableAbstractAggregateRoot<Fulfillment> {
     private Date shippedDate;
     
     @Column(name = "manufacturer_id", nullable = false)
-    private String manufacturerId;
-    
+    private String manufacturerId;    
     public Fulfillment() {
         // Default constructor for JPA
     }
@@ -38,10 +37,20 @@ public class Fulfillment extends AuditableAbstractAggregateRoot<Fulfillment> {
         this.receivedDate = receivedDate;
         this.shippedDate = shippedDate;
         this.manufacturerId = manufacturerId;
+    }    // Constructor for creating new fulfillments (status is "pending", receivedDate and shippedDate are null by default)
+    public Fulfillment(CreateFulfillmentCommand command) {
+        this.orderId = command.orderId();
+        this.status = "pending"; // Automatically set to "pending" for new fulfillments
+        this.receivedDate = null; // Automatically set to null for new fulfillments (not yet received by manufacturer)
+        this.shippedDate = null; // Automatically set to null for new fulfillments
+        this.manufacturerId = command.manufacturerId();
+    }
+      public void updateStatus(String status) {
+        this.status = status;
     }
     
-    public void updateStatus(String status) {
-        this.status = status;
+    public void updateReceivedDate(Date receivedDate) {
+        this.receivedDate = receivedDate;
     }
     
     public void updateShippedDate(Date shippedDate) {
