@@ -3,11 +3,10 @@ package quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates.Manufacturer;
 import quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence.jpa.repositories.ManufacturerRepository;
 
-@Component
+// @Component // DISABLED: Commented out to prevent sample data initialization for persistent data
 @Order(2) // Execute after FulfillmentDataInitializer
 public class ManufacturerDataInitializer implements CommandLineRunner {
     
