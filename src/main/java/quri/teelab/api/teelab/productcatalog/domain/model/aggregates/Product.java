@@ -5,11 +5,10 @@ import lombok.Getter;
 import quri.teelab.api.teelab.productcatalog.domain.model.commands.CreateProductCommand;
 import quri.teelab.api.teelab.productcatalog.domain.model.entities.Comment;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ManufacturerId;
-import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.Money;
+import quri.teelab.api.teelab.shared.domain.model.valueobjects.Money;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ProjectId;
 import quri.teelab.api.teelab.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @Getter

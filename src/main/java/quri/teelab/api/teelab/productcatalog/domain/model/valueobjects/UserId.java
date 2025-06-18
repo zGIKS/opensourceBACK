@@ -2,8 +2,9 @@ package quri.teelab.api.teelab.productcatalog.domain.model.valueobjects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import java.util.Objects;
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Value object representing a reference to a User entity from the UserManagement bounded context.
@@ -40,13 +41,13 @@ public record UserId(String value) implements Serializable {
     }
     
     /**
-     * Factory method for creating a UserId from a Long value.
-     * This is useful for integration with systems that use numeric user IDs.
+     * Factory method for creating a UserId from a UUID value.
+     * This is useful for integration with systems that use UUID user IDs.
      *
-     * @param id The numeric user ID
+     * @param id The UUID user ID
      * @return A new UserId instance
      */
-    public static UserId of(Long id) {
+    public static UserId of(UUID id) {
         return new UserId(id.toString());
     }
     
