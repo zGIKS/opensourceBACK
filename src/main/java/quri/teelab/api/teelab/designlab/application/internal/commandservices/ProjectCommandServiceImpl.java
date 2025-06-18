@@ -21,6 +21,8 @@ public class ProjectCommandServiceImpl implements ProjectCommandService {
 
     @Override
     public UUID handle(DeleteProjectLayerCommand command) {
+        var layerId = command.layerId();
+
         if (!layerRepository.existsById(command.layerId())) {
             throw new IllegalArgumentException("Layer with ID " + command.layerId() + " does not exist.");
         }

@@ -1,16 +1,24 @@
 package quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Embeddable
-public record OrderId(UUID orderId) {
-
+public record OrderId(
+    @Column(name = "order_id", columnDefinition = "UUID") 
+    UUID value
+) implements Serializable {
     public OrderId {
-        if (orderId == null) {
+        if (value == null) {
             throw new IllegalArgumentException("Order ID cannot be null");
         }
     }
-
+    
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }

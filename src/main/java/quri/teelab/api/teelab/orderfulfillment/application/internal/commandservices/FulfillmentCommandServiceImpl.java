@@ -1,11 +1,13 @@
 package quri.teelab.api.teelab.orderfulfillment.application.internal.commandservices;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates.Fulfillment;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates.Manufacturer;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfillmentCommand;
-import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentCommandService;
 import quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence.jpa.repositories.FulfillmentRepository;
+import quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence.jpa.repositories.ManufacturerRepository;
 
 import java.util.UUID;
 

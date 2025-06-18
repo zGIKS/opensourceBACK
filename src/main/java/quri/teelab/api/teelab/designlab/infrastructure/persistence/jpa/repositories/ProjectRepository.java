@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
-    boolean existsById(UUID projectId);
+    boolean existsById(ProjectId projectId);
 }
