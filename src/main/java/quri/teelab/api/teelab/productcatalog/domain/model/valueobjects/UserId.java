@@ -1,14 +1,17 @@
 package quri.teelab.api.teelab.productcatalog.domain.model.valueobjects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Value object representing a reference to a User entity from the UserManagement bounded context.
- * This is part of the anti-corruption layer between ProductCatalog and UserManagement contexts.
+ * Value object representing a reference to a User within the Product Catalog domain.
+ * 
+ * This is an intentionally simplified identifier that contains only what the Product Catalog
+ * domain needs to know about a User, without any implementation details of external systems.
+ * The Application layer's ACL is responsible for translating between this simple identifier
+ * and any external system representations.
  */
 @Embeddable
 public record UserId(String value) implements Serializable {
