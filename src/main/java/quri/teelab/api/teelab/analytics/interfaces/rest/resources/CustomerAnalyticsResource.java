@@ -1,6 +1,6 @@
 package quri.teelab.api.teelab.analytics.interfaces.rest.resources;
 
-public class CustomerAnalyticsResponse {
+public class CustomerAnalyticsResource {
     private String userId;
     private int totalProjects;
     private int blueprints;
@@ -8,7 +8,7 @@ public class CustomerAnalyticsResponse {
     private int completed;
     private String id;
 
-    public CustomerAnalyticsResponse(String userId, int totalProjects, int blueprints, int designedGarments, int completed, String id) {
+    public CustomerAnalyticsResource(String userId, int totalProjects, int blueprints, int designedGarments, int completed, String id) {
         this.userId = userId;
         this.totalProjects = totalProjects;
         this.blueprints = blueprints;

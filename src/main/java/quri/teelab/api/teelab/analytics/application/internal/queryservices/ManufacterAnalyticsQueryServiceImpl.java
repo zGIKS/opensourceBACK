@@ -6,10 +6,10 @@ import quri.teelab.api.teelab.analytics.domain.model.queries.GetManufacturerAnal
 import quri.teelab.api.teelab.analytics.infrastructure.persistence.jpa.repositories.ManufacturerAnalyticsRepository;
 
 @Service
-public class AnalyticsManufacterServiceImpl {
+public class ManufacterAnalyticsQueryServiceImpl {
     private final ManufacturerAnalyticsRepository manufacturerAnalyticsRepository;
 
-    public AnalyticsManufacterServiceImpl(ManufacturerAnalyticsRepository manufacturerAnalyticsRepository) {
+    public ManufacterAnalyticsQueryServiceImpl(ManufacturerAnalyticsRepository manufacturerAnalyticsRepository) {
         this.manufacturerAnalyticsRepository = manufacturerAnalyticsRepository;
     }
 

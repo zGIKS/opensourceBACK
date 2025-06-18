@@ -1,11 +1,11 @@
 package quri.teelab.api.teelab.analytics.interfaces.rest.transform;
 
 import quri.teelab.api.teelab.analytics.domain.model.entities.ManufacturerAnalytics;
-import quri.teelab.api.teelab.analytics.interfaces.rest.resources.ManufacturerAnalyticsResponse;
+import quri.teelab.api.teelab.analytics.interfaces.rest.resources.ManufacturerAnalyticsResource;
 
-public class ManufacturerAnalyticsMapper {
-    public static ManufacturerAnalyticsResponse toResponse(ManufacturerAnalytics analytics) {
-        return new ManufacturerAnalyticsResponse(
+public class ManufacturerAnalyticsResourceFromEntityAssembler {
+    public static ManufacturerAnalyticsResource toResponse(ManufacturerAnalytics analytics) {
+        return new ManufacturerAnalyticsResource(
             analytics.getUserId(),
             analytics.getTotalOrdersReceived(),
             analytics.getPendingFulfillments(),

@@ -6,10 +6,10 @@ import quri.teelab.api.teelab.analytics.domain.model.queries.GetCustomerAnalytic
 import quri.teelab.api.teelab.analytics.infrastructure.persistence.jpa.repositories.CustomerAnalyticsRepository;
 
 @Service
-public class AnalyticsCustomerServiceImpl {
+public class CustomerAnalyticsQueryServiceImpl {
     private final CustomerAnalyticsRepository customerAnalyticsRepository;
 
-    public AnalyticsCustomerServiceImpl(CustomerAnalyticsRepository customerAnalyticsRepository) {
+    public CustomerAnalyticsQueryServiceImpl(CustomerAnalyticsRepository customerAnalyticsRepository) {
         this.customerAnalyticsRepository = customerAnalyticsRepository;
     }
 

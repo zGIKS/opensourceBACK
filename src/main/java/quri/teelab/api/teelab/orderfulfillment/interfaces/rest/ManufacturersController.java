@@ -19,7 +19,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/api/v1/manufacturers", produces = APPLICATION_JSON_VALUE)
-@Tag(name = "Manufacturers", description = "Available Manufacturer Endpoints")
 public class ManufacturersController {
     
     private final ManufacturerQueryService manufacturerQueryService;
