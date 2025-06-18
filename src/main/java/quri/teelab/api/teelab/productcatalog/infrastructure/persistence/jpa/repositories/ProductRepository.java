@@ -7,10 +7,11 @@ import org.springframework.stereotype.Repository;
 import quri.teelab.api.teelab.productcatalog.domain.model.aggregates.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
-    
+public interface ProductRepository extends JpaRepository<Product, UUID> {
+
     /**
      * Finds all products by projectId string value.
      * Part of the anticorruption layer to allow external systems to use string IDs
