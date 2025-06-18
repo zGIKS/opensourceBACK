@@ -3,6 +3,7 @@ package quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates;
 import jakarta.persistence.*;
 import lombok.Getter;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfillmentCommand;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentStatus;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.ManufacturerId;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.OrderId;
@@ -15,6 +16,11 @@ import java.util.UUID;
 @Entity
 @Table(name = "fulfillments")
 public class Fulfillment extends AuditableAbstractAggregateRoot<Fulfillment> {
+
+    @EmbeddedId
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
+    private FulfillmentId id;
 
     @Column(name = "order_id", nullable = false)
     private OrderId orderId;

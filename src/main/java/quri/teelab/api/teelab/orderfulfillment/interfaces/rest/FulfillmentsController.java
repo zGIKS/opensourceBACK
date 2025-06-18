@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import quri.teelab.api.teelab.orderfulfillment.domain.model.queries.GetAllFulfillmentsQuery;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.queries.GetAllFulfillmentsByManufacturerIdQuery;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.queries.GetFulfillmentByIdQuery;
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentCommandService;
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentQueryService;
@@ -40,7 +40,7 @@ public class FulfillmentsController {
             @ApiResponse(responseCode = "404", description = "Fulfillments not found")
     })
     public ResponseEntity<List<FulfillmentResource>> getAllFulfillments() {
-        var fulfillments = fulfillmentQueryService.handle(new GetAllFulfillmentsQuery());
+        var fulfillments = fulfillmentQueryService.handle(new GetAllFulfillmentsByManufacturerIdQuery());
         if (fulfillments.isEmpty()) return ResponseEntity.notFound().build();
         var fulfillmentResources = fulfillments.stream()
                 .map(FulfillmentResourceFromEntityAssembler::toResourceFromEntity)
