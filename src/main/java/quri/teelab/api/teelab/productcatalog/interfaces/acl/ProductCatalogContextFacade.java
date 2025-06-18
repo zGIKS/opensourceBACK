@@ -1,7 +1,11 @@
 package quri.teelab.api.teelab.productcatalog.interfaces.acl;
 
+import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ManufacturerId;
+import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ProjectId;
 import quri.teelab.api.teelab.shared.domain.model.valueobjects.Money;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -89,10 +93,10 @@ public interface ProductCatalogContextFacade {
      */
     record ProductInfo(
         UUID id,
-        String projectId,
-        String manufacturerId,
-        java.math.BigDecimal priceAmount,
-        String currency,
+        ProjectId projectId,
+        ManufacturerId manufacturerId,
+        Money priceAmount,
+        Currency currency,
         Integer likes,
         List<String> tags,
         List<String> gallery,
