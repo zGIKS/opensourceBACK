@@ -18,7 +18,7 @@ public class FulfillmentCommandServiceImpl implements FulfillmentCommandService 
         this.fulfillmentRepository = fulfillmentRepository;
     }
       @Override
-    public FulfillmentId handle(CreateFulfillmentCommand command) {
+    public UUID handle(CreateFulfillmentCommand command) {
         var fulfillment = new Fulfillment(command);
         fulfillmentRepository.save(fulfillment);
         return fulfillment.getId();

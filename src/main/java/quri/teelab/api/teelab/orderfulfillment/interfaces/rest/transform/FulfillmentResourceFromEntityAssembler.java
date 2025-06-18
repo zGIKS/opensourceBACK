@@ -7,11 +7,11 @@ public class FulfillmentResourceFromEntityAssembler {
       public static FulfillmentResource toResourceFromEntity(Fulfillment entity) {
         return new FulfillmentResource(
                 entity.getId().toString(),
-                entity.getOrderId(),
+                entity.getOrderId().toString(),
                 entity.getStatus(),
                 entity.getReceivedDate(),
                 entity.getShippedDate(),
-                entity.getManufacturerId(),
+                entity.getManufacturerId().toString(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
         );
