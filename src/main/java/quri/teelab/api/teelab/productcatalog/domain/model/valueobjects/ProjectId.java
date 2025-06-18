@@ -2,8 +2,9 @@ package quri.teelab.api.teelab.productcatalog.domain.model.valueobjects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import java.util.Objects;
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Value object representing a reference to a Project entity from the DesignLab bounded context.
@@ -40,13 +41,13 @@ public record ProjectId(String value) implements Serializable {
     }
     
     /**
-     * Factory method for creating a ProjectId from a Long value.
-     * This is useful for integration with systems that use numeric project IDs.
+     * Factory method for creating a ProjectId from a UUID value.
+     * This is useful for integration with systems that use UUID project IDs.
      *
-     * @param id The numeric project ID
+     * @param id The UUID project ID
      * @return A new ProjectId instance
      */
-    public static ProjectId of(Long id) {
+    public static ProjectId of(UUID id) {
         return new ProjectId(id.toString());
     }
     

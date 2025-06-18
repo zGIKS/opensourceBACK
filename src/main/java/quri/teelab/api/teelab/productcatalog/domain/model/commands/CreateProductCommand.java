@@ -2,7 +2,7 @@ package quri.teelab.api.teelab.productcatalog.domain.model.commands;
 
 import java.util.List;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ManufacturerId;
-import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.Money;
+import quri.teelab.api.teelab.shared.domain.model.valueobjects.Money;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ProjectId;
 
 public record CreateProductCommand(

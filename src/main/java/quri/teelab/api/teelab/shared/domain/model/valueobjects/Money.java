@@ -1,4 +1,4 @@
-package quri.teelab.api.teelab.productcatalog.domain.model.valueobjects;
+package quri.teelab.api.teelab.shared.domain.model.valueobjects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.Column;

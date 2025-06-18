@@ -3,7 +3,7 @@ package quri.teelab.api.teelab.productcatalog.interfaces.rest.transform;
 import java.util.Currency;
 import quri.teelab.api.teelab.productcatalog.domain.model.commands.CreateProductCommand;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ManufacturerId;
-import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.Money;
+import quri.teelab.api.teelab.shared.domain.model.valueobjects.Money;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ProjectId;
 import quri.teelab.api.teelab.productcatalog.interfaces.rest.resources.CreateProductResource;
 

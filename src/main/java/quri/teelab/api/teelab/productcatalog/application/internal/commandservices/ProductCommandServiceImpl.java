@@ -11,6 +11,7 @@ import quri.teelab.api.teelab.productcatalog.infrastructure.persistence.jpa.repo
 import quri.teelab.api.teelab.productcatalog.infrastructure.persistence.jpa.repositories.ProductRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductCommandServiceImpl implements ProductCommandService {
@@ -24,7 +25,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     }
     
     @Override
-    public Long handle(CreateProductCommand command) {
+    public UUID handle(CreateProductCommand command) {
         var product = new Product(command);
         productRepository.save(product);
         return product.getId();
@@ -43,7 +44,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
     }
     
     @Override
-    public Long handle(AddCommentCommand command) {
+    public UUID handle(AddCommentCommand command) {
         Optional<Product> productOptional = productRepository.findById(command.productId());
         if (productOptional.isPresent()) {
             Product product = productOptional.get();
