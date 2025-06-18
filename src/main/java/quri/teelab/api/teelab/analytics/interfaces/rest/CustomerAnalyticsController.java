@@ -13,6 +13,8 @@ import quri.teelab.api.teelab.analytics.domain.model.queries.GetCustomerAnalytic
 import quri.teelab.api.teelab.analytics.interfaces.rest.resources.CustomerAnalyticsResource;
 import quri.teelab.api.teelab.analytics.interfaces.rest.transform.CustomerAnalyticsResourceFromEntityAssembler;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/analytics/customer")
 public class CustomerAnalyticsController {
@@ -39,7 +41,13 @@ public class CustomerAnalyticsController {
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<CustomerAnalyticsResource> getCustomerAnalytics(@PathVariable String userId) {
-        var query = new GetCustomerAnalyticsByUserIdQuery(userId);
+        UUID uuid;
+        try {
+            uuid = UUID.fromString(userId);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        var query = new GetCustomerAnalyticsByUserIdQuery(uuid);
         var analytics = customerAnalyticsQueryService.handle(query);
         if (analytics == null) {
             return ResponseEntity.notFound().build();
@@ -48,4 +56,3 @@ public class CustomerAnalyticsController {
         return ResponseEntity.ok(response);
     }
 }
-
