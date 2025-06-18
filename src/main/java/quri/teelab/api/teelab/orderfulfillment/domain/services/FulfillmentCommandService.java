@@ -1,9 +1,8 @@
 package quri.teelab.api.teelab.orderfulfillment.domain.services;
 
 import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfillmentCommand;
-
-import java.util.UUID;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
 
 public interface FulfillmentCommandService {
-    UUID handle(CreateFulfillmentCommand command);
+    FulfillmentId handle(CreateFulfillmentCommand command);
 }

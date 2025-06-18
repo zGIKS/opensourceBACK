@@ -58,8 +58,8 @@ public class FulfillmentsController {
     public ResponseEntity<FulfillmentResource> createFulfillment(@RequestBody CreateFulfillmentResource resource) {
         var createFulfillmentCommand = CreateFulfillmentCommandFromResourceAssembler.toCommandFromResource(resource);
         var fulfillmentId = fulfillmentCommandService.handle(createFulfillmentCommand);
-        if (fulfillmentId == null || fulfillmentId == 0L) return ResponseEntity.badRequest().build();
-        
+        if (fulfillmentId == null) return ResponseEntity.badRequest().build();
+
         var getFulfillmentByIdQuery = new GetFulfillmentByIdQuery(fulfillmentId);
         var fulfillment = fulfillmentQueryService.handle(getFulfillmentByIdQuery);
         if (fulfillment.isEmpty()) return ResponseEntity.notFound().build();

@@ -3,6 +3,7 @@ package quri.teelab.api.teelab.orderfulfillment.application.internal.commandserv
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates.Fulfillment;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfillmentCommand;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentCommandService;
 import quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence.jpa.repositories.FulfillmentRepository;
 
@@ -17,9 +18,9 @@ public class FulfillmentCommandServiceImpl implements FulfillmentCommandService 
         this.fulfillmentRepository = fulfillmentRepository;
     }
       @Override
-    public UUID handle(CreateFulfillmentCommand command) {
+    public FulfillmentId handle(CreateFulfillmentCommand command) {
         var fulfillment = new Fulfillment(command);
         fulfillmentRepository.save(fulfillment);
-        return fulfillment.getId().fulfillmentId();
+        return fulfillment.getId();
     }
 }
