@@ -1,4 +1,6 @@
 package quri.teelab.api.teelab.orderfulfillment.domain.model.queries;
 
-public record GetFulfillmentByIdQuery(Long fulfillmentId) {
+import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
+
+public record GetFulfillmentByIdQuery(FulfillmentId fulfillmentId) {
 }

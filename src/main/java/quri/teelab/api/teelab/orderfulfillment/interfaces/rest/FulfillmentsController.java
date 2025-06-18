@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import quri.teelab.api.teelab.orderfulfillment.domain.model.queries.GetAllFulfillmentsQuery;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.queries.GetAllFulfillmentsByManufacturerIdQuery;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.queries.GetFulfillmentByIdQuery;
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentCommandService;
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentQueryService;
@@ -33,14 +33,15 @@ public class FulfillmentsController {
         this.fulfillmentQueryService = fulfillmentQueryService;
     }
     
-    @GetMapping
+    @GetMapping(value = "/{manufacturerId}")
     @Operation(summary = "Get all fulfillments", description = "Get all fulfillments")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fulfillments found"),
             @ApiResponse(responseCode = "404", description = "Fulfillments not found")
     })
-    public ResponseEntity<List<FulfillmentResource>> getAllFulfillments() {
-        var fulfillments = fulfillmentQueryService.handle(new GetAllFulfillmentsQuery());
+    public ResponseEntity<List<FulfillmentResource>> getAllFulfillmentsByManufacturerId() {
+        // TODO: Create a transform resource to get manufacturerId from request parameters
+        var fulfillments = fulfillmentQueryService.handle(new GetAllFulfillmentsByManufacturerIdQuery());
         if (fulfillments.isEmpty()) return ResponseEntity.notFound().build();
         var fulfillmentResources = fulfillments.stream()
                 .map(FulfillmentResourceFromEntityAssembler::toResourceFromEntity)
@@ -58,8 +59,8 @@ public class FulfillmentsController {
     public ResponseEntity<FulfillmentResource> createFulfillment(@RequestBody CreateFulfillmentResource resource) {
         var createFulfillmentCommand = CreateFulfillmentCommandFromResourceAssembler.toCommandFromResource(resource);
         var fulfillmentId = fulfillmentCommandService.handle(createFulfillmentCommand);
-        if (fulfillmentId == null || fulfillmentId == 0L) return ResponseEntity.badRequest().build();
-        
+        if (fulfillmentId == null) return ResponseEntity.badRequest().build();
+
         var getFulfillmentByIdQuery = new GetFulfillmentByIdQuery(fulfillmentId);
         var fulfillment = fulfillmentQueryService.handle(getFulfillmentByIdQuery);
         if (fulfillment.isEmpty()) return ResponseEntity.notFound().build();
