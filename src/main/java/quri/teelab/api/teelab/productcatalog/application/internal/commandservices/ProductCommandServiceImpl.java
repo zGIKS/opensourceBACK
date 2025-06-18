@@ -15,22 +15,22 @@ import java.util.UUID;
 
 @Service
 public class ProductCommandServiceImpl implements ProductCommandService {
-    
+
     private final ProductRepository productRepository;
     private final CommentRepository commentRepository;
-    
+
     public ProductCommandServiceImpl(ProductRepository productRepository, CommentRepository commentRepository) {
         this.productRepository = productRepository;
         this.commentRepository = commentRepository;
     }
-    
+
     @Override
     public UUID handle(CreateProductCommand command) {
         var product = new Product(command);
         productRepository.save(product);
         return product.getId();
     }
-    
+
     @Override
     public void handle(UpdateProductPriceCommand command) {
         Optional<Product> productOptional = productRepository.findById(command.productId());
@@ -42,7 +42,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
             throw new IllegalArgumentException("Product not found with ID: " + command.productId());
         }
     }
-    
+
     @Override
     public UUID handle(AddCommentCommand command) {
         Optional<Product> productOptional = productRepository.findById(command.productId());
@@ -50,10 +50,10 @@ public class ProductCommandServiceImpl implements ProductCommandService {
             Product product = productOptional.get();
             Comment comment = new Comment(command.userId(), command.text());
             commentRepository.save(comment);
-            
+
             product.addComment(comment);
             productRepository.save(product);
-            
+
             return comment.getId();
         } else {
             throw new IllegalArgumentException("Product not found with ID: " + command.productId());

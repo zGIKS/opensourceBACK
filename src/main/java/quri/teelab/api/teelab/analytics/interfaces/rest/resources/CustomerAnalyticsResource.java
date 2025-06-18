@@ -17,10 +17,27 @@ public class CustomerAnalyticsResource {
         this.id = id;
     }
 
-    public String getUserId() { return userId; }
-    public int getTotalProjects() { return totalProjects; }
-    public int getBlueprints() { return blueprints; }
-    public int getDesignedGarments() { return designedGarments; }
-    public int getCompleted() { return completed; }
-    public String getId() { return id; }
+    public String getUserId() {
+        return userId;
+    }
+
+    public int getTotalProjects() {
+        return totalProjects;
+    }
+
+    public int getBlueprints() {
+        return blueprints;
+    }
+
+    public int getDesignedGarments() {
+        return designedGarments;
+    }
+
+    public int getCompleted() {
+        return completed;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

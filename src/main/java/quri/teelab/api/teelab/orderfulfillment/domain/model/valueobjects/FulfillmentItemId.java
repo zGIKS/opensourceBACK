@@ -1,6 +1,7 @@
 package quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects;
 
 import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;

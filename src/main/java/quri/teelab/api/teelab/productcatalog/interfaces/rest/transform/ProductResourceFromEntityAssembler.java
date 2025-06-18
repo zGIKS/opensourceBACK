@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * Part of the anti-corruption layer for the REST interface.
  */
 public class ProductResourceFromEntityAssembler {
-    
+
     public static ProductResource toResourceFromEntity(Product entity) {
         return new ProductResource(
                 entity.getId().toString(),

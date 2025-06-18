@@ -2,6 +2,7 @@ package quri.teelab.api.teelab.analytics.domain.model.entities;
 
 import quri.teelab.api.teelab.analytics.domain.model.valueobjects.AnalyticsId;
 import jakarta.persistence.*;
+
 import java.util.UUID;
 
 @Entity
@@ -26,7 +27,8 @@ public class CustomerAnalytics {
     private int completed;
 
     // Constructor sin argumentos requerido por JPA
-    protected CustomerAnalytics() {}
+    protected CustomerAnalytics() {
+    }
 
     public CustomerAnalytics(AnalyticsId id, UUID userId, int totalProjects, int blueprints, int designedGarments, int completed) {
         this.id = id;
@@ -37,10 +39,27 @@ public class CustomerAnalytics {
         this.completed = completed;
     }
 
-    public AnalyticsId getId() { return id; }
-    public UUID getUserId() { return userId; }
-    public int getTotalProjects() { return totalProjects; }
-    public int getBlueprints() { return blueprints; }
-    public int getDesignedGarments() { return designedGarments; }
-    public int getCompleted() { return completed; }
+    public AnalyticsId getId() {
+        return id;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public int getTotalProjects() {
+        return totalProjects;
+    }
+
+    public int getBlueprints() {
+        return blueprints;
+    }
+
+    public int getDesignedGarments() {
+        return designedGarments;
+    }
+
+    public int getCompleted() {
+        return completed;
+    }
 }

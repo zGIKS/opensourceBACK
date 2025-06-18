@@ -1,6 +1,5 @@
 package quri.teelab.api.teelab.analytics.application.internal.queryservices;
 
-import java.util.UUID;
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.analytics.domain.model.entities.CustomerAnalytics;
 import quri.teelab.api.teelab.analytics.domain.model.queries.GetCustomerAnalyticsByUserIdQuery;

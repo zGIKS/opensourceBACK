@@ -15,10 +15,24 @@ public class ManufacturerAnalyticsResource {
         this.avgFulfillmentTimeDays = avgFulfillmentTimeDays;
     }
 
-    public String getUserId() { return userId; }
-    public int getTotalOrdersReceived() { return totalOrdersReceived; }
-    public int getPendingFulfillments() { return pendingFulfillments; }
-    public int getProducedProjects() { return producedProjects; }
-    public double getAvgFulfillmentTimeDays() { return avgFulfillmentTimeDays; }
+    public String getUserId() {
+        return userId;
+    }
+
+    public int getTotalOrdersReceived() {
+        return totalOrdersReceived;
+    }
+
+    public int getPendingFulfillments() {
+        return pendingFulfillments;
+    }
+
+    public int getProducedProjects() {
+        return producedProjects;
+    }
+
+    public double getAvgFulfillmentTimeDays() {
+        return avgFulfillmentTimeDays;
+    }
 }
 

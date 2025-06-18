@@ -10,22 +10,22 @@ public enum FulfillmentStatus {
      * The fulfillment has been registered but not yet processed.
      */
     PENDING,
-    
+
     /**
      * The fulfillment is currently being processed by the manufacturer.
      */
     PROCESSING,
-    
+
     /**
      * The fulfillment has been shipped to the customer.
      */
     SHIPPED,
-    
+
     /**
      * The fulfillment has been successfully delivered to the customer.
      */
     DELIVERED,
-    
+
     /**
      * The fulfillment has been cancelled and will not be completed.
      */

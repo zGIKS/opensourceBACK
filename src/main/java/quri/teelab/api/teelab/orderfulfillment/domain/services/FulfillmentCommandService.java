@@ -3,6 +3,8 @@ package quri.teelab.api.teelab.orderfulfillment.domain.services;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfillmentCommand;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
 
+import java.util.UUID;
+
 public interface FulfillmentCommandService {
-    FulfillmentId handle(CreateFulfillmentCommand command);
+    UUID handle(CreateFulfillmentCommand command);
 }

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Resource for creating a new Product. 
+ * Resource for creating a new Product.
  * Uses primitive types at the API boundary as part of the anti-corruption layer pattern.
  */
 public record CreateProductResource(

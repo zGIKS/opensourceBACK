@@ -42,7 +42,7 @@ public class CommentsController {
     public ResponseEntity<CommentResource> addComment(
             @PathVariable UUID productId,
             @RequestBody CreateCommentResource resource) {
-        
+
         var command = AddCommentCommandFromResourceAssembler.toCommandFromResource(productId, resource);
         var commentId = productCommandService.handle(command);
 
