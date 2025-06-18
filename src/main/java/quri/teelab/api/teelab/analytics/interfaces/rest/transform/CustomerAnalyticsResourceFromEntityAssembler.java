@@ -6,7 +6,7 @@ import quri.teelab.api.teelab.analytics.interfaces.rest.resources.CustomerAnalyt
 public class CustomerAnalyticsResourceFromEntityAssembler {
     public static CustomerAnalyticsResource toResponse(CustomerAnalytics analytics) {
         return new CustomerAnalyticsResource(
-            analytics.getUserId(),
+            analytics.getUserId().toString(),
             analytics.getTotalProjects(),
             analytics.getBlueprints(),
             analytics.getDesignedGarments(),

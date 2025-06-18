@@ -4,11 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EmbeddedId;
 import quri.teelab.api.teelab.analytics.domain.model.valueobjects.AnalyticsId;
 
+import java.util.UUID;
+
 @Entity
 public class ManufacturerAnalytics {
     @EmbeddedId
     private AnalyticsId id;
-    private String userId;
+    private UUID userId;
     private int totalOrdersReceived;
     private int pendingFulfillments;
     private int producedProjects;
@@ -17,7 +19,7 @@ public class ManufacturerAnalytics {
     // Constructor sin argumentos requerido por JPA
     protected ManufacturerAnalytics() {}
 
-    public ManufacturerAnalytics(AnalyticsId id, String userId, int totalOrdersReceived, int pendingFulfillments, int producedProjects, double avgFulfillmentTimeDays) {
+    public ManufacturerAnalytics(AnalyticsId id, UUID userId, int totalOrdersReceived, int pendingFulfillments, int producedProjects, double avgFulfillmentTimeDays) {
         this.id = id;
         this.userId = userId;
         this.totalOrdersReceived = totalOrdersReceived;
@@ -27,7 +29,7 @@ public class ManufacturerAnalytics {
     }
 
     public AnalyticsId getId() { return id; }
-    public String getUserId() { return userId; }
+    public UUID getUserId() { return userId; }
     public int getTotalOrdersReceived() { return totalOrdersReceived; }
     public int getPendingFulfillments() { return pendingFulfillments; }
     public int getProducedProjects() { return producedProjects; }

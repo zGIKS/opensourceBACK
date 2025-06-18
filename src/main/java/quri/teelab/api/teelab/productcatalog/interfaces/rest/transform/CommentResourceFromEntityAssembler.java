@@ -7,8 +7,8 @@ public class CommentResourceFromEntityAssembler {
     
     public static CommentResource toResourceFromEntity(Comment entity) {
         return new CommentResource(
-                entity.getId().toString(),
-                entity.getUserId().value(), // Extract the string value from the UserId object
+                entity.getId(), // Pasar directamente el UUID en lugar de convertirlo a String
+                entity.getUserId().value(),
                 entity.getText(),
                 entity.getCreatedAt()
         );

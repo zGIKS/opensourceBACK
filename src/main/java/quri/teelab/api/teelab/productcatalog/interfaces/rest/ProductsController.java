@@ -19,6 +19,7 @@ import quri.teelab.api.teelab.productcatalog.interfaces.rest.transform.CreatePro
 import quri.teelab.api.teelab.productcatalog.interfaces.rest.transform.ProductResourceFromEntityAssembler;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -59,7 +60,7 @@ public class ProductsController {
             @ApiResponse(responseCode = "200", description = "Product found"),
             @ApiResponse(responseCode = "404", description = "Product not found")
     })
-    public ResponseEntity<ProductResource> getProductById(@PathVariable Long productId) {
+    public ResponseEntity<ProductResource> getProductById(@PathVariable UUID productId) {
         var product = productQueryService.handle(new GetProductByIdQuery(productId));
         if (product.isEmpty()) return ResponseEntity.notFound().build();
         
@@ -111,8 +112,8 @@ public class ProductsController {
         var createProductCommand = CreateProductCommandFromResourceAssembler.toCommandFromResource(resource);
         var productId = productCommandService.handle(createProductCommand);
         
-        if (productId == null || productId == 0L) return ResponseEntity.badRequest().build();
-        
+        if (productId == null) return ResponseEntity.badRequest().build();
+
         var getProductByIdQuery = new GetProductByIdQuery(productId);
         var product = productQueryService.handle(getProductByIdQuery);
         

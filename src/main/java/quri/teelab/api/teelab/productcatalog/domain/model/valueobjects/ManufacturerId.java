@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.util.Objects;
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Value object representing a reference to a Manufacturer entity from the ManufacturerManagement bounded context.
@@ -40,13 +41,13 @@ public record ManufacturerId(String value) implements Serializable {
     }
     
     /**
-     * Factory method for creating a ManufacturerId from a Long value.
-     * This is useful for integration with systems that use numeric manufacturer IDs.
+     * Factory method for creating a ManufacturerId from a UUID value.
+     * This is useful for integration with systems that use UUID manufacturer IDs.
      *
-     * @param id The numeric manufacturer ID
+     * @param id The UUID manufacturer ID
      * @return A new ManufacturerId instance
      */
-    public static ManufacturerId of(Long id) {
+    public static ManufacturerId of(UUID id) {
         return new ManufacturerId(id.toString());
     }
     

@@ -4,8 +4,10 @@ import quri.teelab.api.teelab.productcatalog.domain.model.commands.AddCommentCom
 import quri.teelab.api.teelab.productcatalog.domain.model.commands.CreateProductCommand;
 import quri.teelab.api.teelab.productcatalog.domain.model.commands.UpdateProductPriceCommand;
 
+import java.util.UUID;
+
 public interface ProductCommandService {
-    Long handle(CreateProductCommand command);
+    UUID handle(CreateProductCommand command);
     void handle(UpdateProductPriceCommand command);
-    Long handle(AddCommentCommand command);
+    UUID handle(AddCommentCommand command);
 }
