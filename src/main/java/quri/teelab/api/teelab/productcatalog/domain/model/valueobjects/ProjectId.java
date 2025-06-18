@@ -1,14 +1,17 @@
 package quri.teelab.api.teelab.productcatalog.domain.model.valueobjects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Value object representing a reference to a Project entity from the DesignLab bounded context.
- * This is part of the anti-corruption layer between ProductCatalog and DesignLab contexts.
+ * Value object representing a reference to a Project within the Product Catalog domain.
+ * 
+ * This is an intentionally simplified identifier that contains only what the Product Catalog
+ * domain needs to know about a Project, without any implementation details of the DesignLab context.
+ * The Application layer's ACL is responsible for translating between this simple identifier
+ * and any external system representations.
  */
 @Embeddable
 public record ProjectId(String value) implements Serializable {

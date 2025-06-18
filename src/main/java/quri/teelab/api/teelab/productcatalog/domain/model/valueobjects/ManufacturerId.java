@@ -1,14 +1,17 @@
 package quri.teelab.api.teelab.productcatalog.domain.model.valueobjects;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import java.util.Objects;
 import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * Value object representing a reference to a Manufacturer entity from the ManufacturerManagement bounded context.
- * This is part of the anti-corruption layer between ProductCatalog and ManufacturerManagement contexts.
+ * Value object representing a reference to a Manufacturer within the Product Catalog domain.
+ * 
+ * This is an intentionally simplified identifier that contains only what the Product Catalog
+ * domain needs to know about a Manufacturer, without any implementation details of external systems.
+ * The Application layer's ACL is responsible for translating between this simple identifier
+ * and any external system representations.
  */
 @Embeddable
 public record ManufacturerId(String value) implements Serializable {
