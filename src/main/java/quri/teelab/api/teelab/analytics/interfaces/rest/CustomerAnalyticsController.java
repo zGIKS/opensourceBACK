@@ -32,13 +32,13 @@ public class CustomerAnalyticsController {
      */
     @GetMapping("/{userId}")
     @Operation(
-        summary = "Get customer analytics",
-        description = "Returns analytics metrics related to design activities for a customer, such as total projects, blueprints, designed garments, and completed projects."
+            summary = "Get customer analytics",
+            description = "Returns analytics metrics related to design activities for a customer, such as total projects, blueprints, designed garments, and completed projects."
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Customer analytics found and returned successfully"),
-        @ApiResponse(responseCode = "404", description = "Customer analytics not found for the given userId"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "Customer analytics found and returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Customer analytics not found for the given userId"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<CustomerAnalyticsResource> getCustomerAnalytics(@PathVariable String userId) {
         UUID uuid;

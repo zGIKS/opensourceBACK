@@ -14,18 +14,18 @@ import java.util.Optional;
 
 @Service
 public class ProductQueryServiceImpl implements ProductQueryService {
-    
+
     private final ProductRepository productRepository;
-    
+
     public ProductQueryServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    
+
     @Override
     public List<Product> handle(GetAllProductsQuery query) {
         return productRepository.findAll();
     }
-    
+
     @Override
     public Optional<Product> handle(GetProductByIdQuery query) {
         return productRepository.findById(query.productId());

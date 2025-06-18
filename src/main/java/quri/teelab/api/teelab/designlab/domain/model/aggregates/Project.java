@@ -46,7 +46,9 @@ public class Project {
     private Date updatedAt;
 
     // Default constructor required by JPA
-    public Project() {}
+    public Project() {
+    }
+
     public Project(DeleteProjectLayerCommand command) {
         this.id = new ProjectId(command.projectId());
     }

@@ -12,18 +12,18 @@ import java.util.Optional;
 
 @Service
 public class FulfillmentQueryServiceImpl implements FulfillmentQueryService {
-    
+
     private final FulfillmentRepository fulfillmentRepository;
-    
+
     public FulfillmentQueryServiceImpl(FulfillmentRepository fulfillmentRepository) {
         this.fulfillmentRepository = fulfillmentRepository;
     }
-    
+
     @Override
     public List<Fulfillment> handle(GetAllFulfillmentsByManufacturerIdQuery query) {
         return fulfillmentRepository.findAll();
     }
-    
+
     @Override
     public Optional<Fulfillment> handle(GetFulfillmentByIdQuery query) {
         return fulfillmentRepository.findById(query.fulfillmentId());

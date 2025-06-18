@@ -1,6 +1,7 @@
 package quri.teelab.api.teelab.productcatalog.interfaces.rest.transform;
 
 import java.util.Currency;
+
 import quri.teelab.api.teelab.productcatalog.domain.model.commands.CreateProductCommand;
 import quri.teelab.api.teelab.productcatalog.domain.model.valueobjects.ManufacturerId;
 import quri.teelab.api.teelab.shared.domain.model.valueobjects.Money;
@@ -12,12 +13,12 @@ import quri.teelab.api.teelab.productcatalog.interfaces.rest.resources.CreatePro
  * Part of the anti-corruption layer for the REST interface.
  */
 public class CreateProductCommandFromResourceAssembler {
-    
+
     public static CreateProductCommand toCommandFromResource(CreateProductResource resource) {
         Currency currency = Currency.getInstance(
-            resource.currency() != null ? resource.currency() : Money.DEFAULT_CURRENCY.getCurrencyCode()
+                resource.currency() != null ? resource.currency() : Money.DEFAULT_CURRENCY.getCurrencyCode()
         );
-        
+
         return new CreateProductCommand(
                 ProjectId.of(resource.projectId()),
                 ManufacturerId.of(resource.manufacturerId()),

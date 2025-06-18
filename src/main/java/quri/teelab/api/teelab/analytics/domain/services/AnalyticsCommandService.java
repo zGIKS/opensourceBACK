@@ -10,6 +10,7 @@ import quri.teelab.api.teelab.analytics.domain.model.entities.CustomerAnalytics;
 public class AnalyticsCommandService {
     /**
      * Calculates the fulfillment rate for a manufacturer.
+     *
      * @param analytics ManufacturerAnalytics entity
      * @return fulfillment rate as a double between 0 and 1
      */
@@ -22,6 +23,7 @@ public class AnalyticsCommandService {
 
     /**
      * Calculates the completion rate for a customer.
+     *
      * @param analytics CustomerAnalytics entity
      * @return completion rate as a double between 0 and 1
      */

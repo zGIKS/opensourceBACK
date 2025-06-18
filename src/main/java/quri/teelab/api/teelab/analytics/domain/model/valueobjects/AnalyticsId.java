@@ -2,6 +2,7 @@ package quri.teelab.api.teelab.analytics.domain.model.valueobjects;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
@@ -11,7 +12,8 @@ public class AnalyticsId implements Serializable {
     private String value;
 
     // Constructor sin argumentos requerido por JPA
-    protected AnalyticsId() {}
+    protected AnalyticsId() {
+    }
 
     public AnalyticsId(String value) {
         if (value == null || value.isBlank()) {

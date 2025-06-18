@@ -1,6 +1,7 @@
 package quri.teelab.api.teelab.designlab.domain.model.valueobjects;
 
 import jakarta.persistence.Embeddable;
+
 import java.util.UUID;
 
 @Embeddable

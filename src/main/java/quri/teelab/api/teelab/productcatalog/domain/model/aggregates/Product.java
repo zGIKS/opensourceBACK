@@ -14,18 +14,19 @@ import java.util.*;
 @Getter
 @Entity
 @Table(name = "products")
-public class Product extends AuditableAbstractAggregateRoot<Product> {    @Embedded
+public class Product extends AuditableAbstractAggregateRoot<Product> {
+    @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "project_id", nullable = false))
     private ProjectId projectId;
-    
+
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "manufacturer_id", nullable = false))
     private ManufacturerId manufacturerId;
-    
+
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "amount", column = @Column(name = "price_amount", nullable = false)),
-        @AttributeOverride(name = "currency", column = @Column(name = "price_currency", length = 3, nullable = false))
+            @AttributeOverride(name = "amount", column = @Column(name = "price_amount", nullable = false)),
+            @AttributeOverride(name = "currency", column = @Column(name = "price_currency", length = 3, nullable = false))
     })
     private Money price;
 
@@ -66,7 +67,9 @@ public class Product extends AuditableAbstractAggregateRoot<Product> {    @Embed
         this.rating = 0.0; // Initialize with 0 rating
         this.status = command.status();
         this.comments = new ArrayList<>();
-    }    public void updatePrice(Money newPrice) {
+    }
+
+    public void updatePrice(Money newPrice) {
         // Validation is now handled by the Money value object itself
         this.price = newPrice;
     }

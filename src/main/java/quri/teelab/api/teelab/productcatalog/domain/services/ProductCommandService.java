@@ -8,6 +8,8 @@ import java.util.UUID;
 
 public interface ProductCommandService {
     UUID handle(CreateProductCommand command);
+
     void handle(UpdateProductPriceCommand command);
+
     UUID handle(AddCommentCommand command);
 }

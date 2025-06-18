@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public record DeleteProjectLayerCommand(UUID projectId, UUID layerId) {
     public DeleteProjectLayerCommand {
-        if (projectId == null ) {
+        if (projectId == null) {
             throw new IllegalArgumentException("Project ID cannot be null");
         }
         if (layerId == null) {

@@ -9,5 +9,6 @@ import java.util.Optional;
 
 public interface FulfillmentQueryService {
     List<Fulfillment> handle(GetAllFulfillmentsByManufacturerIdQuery query);
+
     Optional<Fulfillment> handle(GetFulfillmentByIdQuery query);
 }

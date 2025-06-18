@@ -32,13 +32,13 @@ public class ManufacterAnalyticsController {
      */
     @GetMapping("/manufacturer/{userId}")
     @Operation(
-        summary = "Get manufacturer analytics",
-        description = "Returns analytics metrics related to production and fulfillment for a manufacturer, such as total orders received, pending fulfillments, produced projects, and average fulfillment time."
+            summary = "Get manufacturer analytics",
+            description = "Returns analytics metrics related to production and fulfillment for a manufacturer, such as total orders received, pending fulfillments, produced projects, and average fulfillment time."
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Manufacturer analytics found and returned successfully"),
-        @ApiResponse(responseCode = "404", description = "Manufacturer analytics not found for the given userId"),
-        @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "Manufacturer analytics found and returned successfully"),
+            @ApiResponse(responseCode = "404", description = "Manufacturer analytics not found for the given userId"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<ManufacturerAnalyticsResource> getManufacturerAnalytics(@PathVariable String userId) {
         UUID uuid;

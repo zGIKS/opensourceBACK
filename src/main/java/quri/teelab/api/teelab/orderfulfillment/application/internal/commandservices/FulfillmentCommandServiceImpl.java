@@ -11,13 +11,14 @@ import java.util.UUID;
 
 @Service
 public class FulfillmentCommandServiceImpl implements FulfillmentCommandService {
-    
+
     private final FulfillmentRepository fulfillmentRepository;
-    
+
     public FulfillmentCommandServiceImpl(FulfillmentRepository fulfillmentRepository) {
         this.fulfillmentRepository = fulfillmentRepository;
     }
-      @Override
+
+    @Override
     public UUID handle(CreateFulfillmentCommand command) {
         var fulfillment = new Fulfillment(command);
         fulfillmentRepository.save(fulfillment);

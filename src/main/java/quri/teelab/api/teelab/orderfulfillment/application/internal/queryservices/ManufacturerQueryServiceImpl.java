@@ -10,13 +10,13 @@ import java.util.List;
 
 @Service
 public class ManufacturerQueryServiceImpl implements ManufacturerQueryService {
-    
+
     private final ManufacturerRepository manufacturerRepository;
-    
+
     public ManufacturerQueryServiceImpl(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
     }
-    
+
     @Override
     public List<Manufacturer> handle(GetAllManufacturersQuery query) {
         return manufacturerRepository.findAll();

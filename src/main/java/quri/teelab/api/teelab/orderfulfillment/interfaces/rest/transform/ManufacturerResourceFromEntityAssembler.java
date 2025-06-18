@@ -4,7 +4,7 @@ import quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates.Manufactu
 import quri.teelab.api.teelab.orderfulfillment.interfaces.rest.resources.ManufacturerResource;
 
 public class ManufacturerResourceFromEntityAssembler {
-    
+
     public static ManufacturerResource toResourceFromEntity(Manufacturer entity) {
         return new ManufacturerResource(
                 "manufacturer-" + entity.getId(),

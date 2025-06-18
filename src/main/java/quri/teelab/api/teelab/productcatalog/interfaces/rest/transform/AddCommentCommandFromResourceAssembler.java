@@ -7,7 +7,7 @@ import quri.teelab.api.teelab.productcatalog.interfaces.rest.resources.CreateCom
 import java.util.UUID;
 
 public class AddCommentCommandFromResourceAssembler {
-    
+
     public static AddCommentCommand toCommandFromResource(UUID productId, CreateCommentResource resource) {
         return new AddCommentCommand(
                 productId,

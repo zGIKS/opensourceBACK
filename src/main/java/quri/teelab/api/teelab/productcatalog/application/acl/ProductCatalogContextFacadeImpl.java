@@ -32,25 +32,14 @@ public class ProductCatalogContextFacadeImpl implements ProductCatalogContextFac
     private final ProductCommandService productCommandService;
     private final ProductQueryService productQueryService;
 
-    public ProductCatalogContextFacadeImpl(ProductCommandService productCommandService,
-                                           ProductQueryService productQueryService) {
+    public ProductCatalogContextFacadeImpl(ProductCommandService productCommandService, ProductQueryService productQueryService) {
         this.productCommandService = productCommandService;
         this.productQueryService = productQueryService;
     }
 
     @Override
-    public UUID createProduct(String projectId, String manufacturerId,
-                              BigDecimal price, String currency,
-                              List<String> tags, List<String> gallery,
-                              String status) {
-        var createProductCommand = new CreateProductCommand(
-                ProjectId.of(projectId),
-                ManufacturerId.of(manufacturerId),
-                new Money(price, Currency.getInstance(DEFAULT_CURRENCY)),
-                tags,
-                gallery,
-                status
-        );
+    public UUID createProduct(String projectId, String manufacturerId, BigDecimal price, String currency, List<String> tags, List<String> gallery, String status) {
+        var createProductCommand = new CreateProductCommand(ProjectId.of(projectId), ManufacturerId.of(manufacturerId), new Money(price, Currency.getInstance(DEFAULT_CURRENCY)), tags, gallery, status);
 
         return productCommandService.handle(createProductCommand);
     }
@@ -75,9 +64,7 @@ public class ProductCatalogContextFacadeImpl implements ProductCatalogContextFac
         var query = new GetProductsByProjectIdQuery(projectId);
         var products = productQueryService.handle(query);
 
-        return products.stream()
-                .map(this::mapToProductInfo)
-                .collect(Collectors.toList());
+        return products.stream().map(this::mapToProductInfo).collect(Collectors.toList());
     }
 
     @Override
@@ -106,26 +93,13 @@ public class ProductCatalogContextFacadeImpl implements ProductCatalogContextFac
         var query = new SearchProductsByTagsQuery(tags);
         var products = productQueryService.handle(query);
 
-        return products.stream()
-                .map(Product::getId)
-                .collect(Collectors.toList());
+        return products.stream().map(Product::getId).collect(Collectors.toList());
     }
 
     /**
      * Maps a domain Product to the ProductInfo DTO for external contexts
      */
     private ProductInfo mapToProductInfo(Product product) {
-        return new ProductInfo(
-                product.getId(),
-                new ProjectId(product.getProjectId().value()),
-                new ManufacturerId(product.getManufacturerId().value()),
-                product.getPrice(),
-                product.getPrice().currency(),
-                product.getLikes(),
-                product.getTags(),
-                product.getGallery(),
-                product.getRating(),
-                product.getStatus()
-        );
+        return new ProductInfo(product.getId(), new ProjectId(product.getProjectId().value()), new ManufacturerId(product.getManufacturerId().value()), product.getPrice(), product.getPrice().currency(), product.getLikes(), product.getTags(), product.getGallery(), product.getRating(), product.getStatus());
     }
 }

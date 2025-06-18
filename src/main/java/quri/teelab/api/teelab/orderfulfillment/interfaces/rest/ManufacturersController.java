@@ -20,13 +20,13 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/manufacturers", produces = APPLICATION_JSON_VALUE)
 public class ManufacturersController {
-    
+
     private final ManufacturerQueryService manufacturerQueryService;
-    
+
     public ManufacturersController(ManufacturerQueryService manufacturerQueryService) {
         this.manufacturerQueryService = manufacturerQueryService;
     }
-    
+
     @GetMapping
     @Operation(summary = "Get all manufacturers", description = "Get all manufacturers")
     @ApiResponses(value = {

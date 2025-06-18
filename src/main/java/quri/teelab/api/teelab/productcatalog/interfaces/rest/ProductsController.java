@@ -28,15 +28,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/v1/products", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Products", description = "Available Product Endpoints")
 public class ProductsController {
-    
+
     private final ProductCommandService productCommandService;
     private final ProductQueryService productQueryService;
-    
+
     public ProductsController(ProductCommandService productCommandService, ProductQueryService productQueryService) {
         this.productCommandService = productCommandService;
         this.productQueryService = productQueryService;
     }
-    
+
     @GetMapping
     @Operation(summary = "Get all products", description = "Get all products from the catalog")
     @ApiResponses(value = {
@@ -46,14 +46,14 @@ public class ProductsController {
     public ResponseEntity<List<ProductResource>> getAllProducts() {
         var products = productQueryService.handle(new GetAllProductsQuery());
         if (products.isEmpty()) return ResponseEntity.notFound().build();
-        
+
         var productResources = products.stream()
                 .map(ProductResourceFromEntityAssembler::toResourceFromEntity)
                 .collect(Collectors.toList());
-        
+
         return ResponseEntity.ok(productResources);
     }
-    
+
     @GetMapping("/{productId}")
     @Operation(summary = "Get product by ID", description = "Get a specific product by its ID")
     @ApiResponses(value = {
@@ -63,11 +63,11 @@ public class ProductsController {
     public ResponseEntity<ProductResource> getProductById(@PathVariable UUID productId) {
         var product = productQueryService.handle(new GetProductByIdQuery(productId));
         if (product.isEmpty()) return ResponseEntity.notFound().build();
-        
+
         var productResource = ProductResourceFromEntityAssembler.toResourceFromEntity(product.get());
         return ResponseEntity.ok(productResource);
     }
-    
+
     @GetMapping("/by-project/{projectId}")
     @Operation(summary = "Get products by project ID", description = "Get all products associated with a specific project")
     @ApiResponses(value = {
@@ -77,14 +77,14 @@ public class ProductsController {
     public ResponseEntity<List<ProductResource>> getProductsByProjectId(@PathVariable String projectId) {
         var products = productQueryService.handle(new GetProductsByProjectIdQuery(projectId));
         if (products.isEmpty()) return ResponseEntity.notFound().build();
-        
+
         var productResources = products.stream()
                 .map(ProductResourceFromEntityAssembler::toResourceFromEntity)
                 .collect(Collectors.toList());
-        
+
         return ResponseEntity.ok(productResources);
     }
-    
+
     @GetMapping("/search")
     @Operation(summary = "Search products by tags", description = "Search products that match any of the provided tags")
     @ApiResponses(value = {
@@ -94,14 +94,14 @@ public class ProductsController {
     public ResponseEntity<List<ProductResource>> searchProductsByTags(@RequestParam List<String> tags) {
         var products = productQueryService.handle(new SearchProductsByTagsQuery(tags));
         if (products.isEmpty()) return ResponseEntity.notFound().build();
-        
+
         var productResources = products.stream()
                 .map(ProductResourceFromEntityAssembler::toResourceFromEntity)
                 .collect(Collectors.toList());
-        
+
         return ResponseEntity.ok(productResources);
     }
-    
+
     @PostMapping
     @Operation(summary = "Create product", description = "Create a new product in the catalog")
     @ApiResponses(value = {
@@ -111,14 +111,14 @@ public class ProductsController {
     public ResponseEntity<ProductResource> createProduct(@RequestBody CreateProductResource resource) {
         var createProductCommand = CreateProductCommandFromResourceAssembler.toCommandFromResource(resource);
         var productId = productCommandService.handle(createProductCommand);
-        
+
         if (productId == null) return ResponseEntity.badRequest().build();
 
         var getProductByIdQuery = new GetProductByIdQuery(productId);
         var product = productQueryService.handle(getProductByIdQuery);
-        
+
         if (product.isEmpty()) return ResponseEntity.notFound().build();
-        
+
         var productResource = ProductResourceFromEntityAssembler.toResourceFromEntity(product.get());
         return new ResponseEntity<>(productResource, HttpStatus.CREATED);
     }
