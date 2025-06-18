@@ -23,7 +23,7 @@ public class ProjectLayersController {
         this.projectQueryService = projectQueryService;
     }
 
-    @DeleteMapping("/{projectId}/layers/{layerId}")
+    @DeleteMapping("/{projectId}/layer/{layerId}")
     @Operation(summary = "Delete Layer from Project", description = "Delete a layer from a project by its unique identifiers")
     public ResponseEntity<?> deleteProjectLayerById(@PathVariable String projectId, @PathVariable String layerId) {
         var command = DeleteProjectLayerCommandFromResourceAssembler.toCommandFromResource(projectId, layerId);
