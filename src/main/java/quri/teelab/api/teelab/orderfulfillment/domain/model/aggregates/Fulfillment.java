@@ -17,11 +17,6 @@ import java.util.UUID;
 @Table(name = "fulfillments")
 public class Fulfillment extends AuditableAbstractAggregateRoot<Fulfillment> {
 
-    @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false, updatable = false)
-    private FulfillmentId id;
-
     @Column(name = "order_id", nullable = false)
     private OrderId orderId;
 
