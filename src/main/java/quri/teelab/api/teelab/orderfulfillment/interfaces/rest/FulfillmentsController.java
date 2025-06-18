@@ -33,13 +33,14 @@ public class FulfillmentsController {
         this.fulfillmentQueryService = fulfillmentQueryService;
     }
     
-    @GetMapping
+    @GetMapping(value = "/{manufacturerId}")
     @Operation(summary = "Get all fulfillments", description = "Get all fulfillments")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Fulfillments found"),
             @ApiResponse(responseCode = "404", description = "Fulfillments not found")
     })
-    public ResponseEntity<List<FulfillmentResource>> getAllFulfillments() {
+    public ResponseEntity<List<FulfillmentResource>> getAllFulfillmentsByManufacturerId() {
+        // TODO: Create a transform resource to get manufacturerId from request parameters
         var fulfillments = fulfillmentQueryService.handle(new GetAllFulfillmentsByManufacturerIdQuery());
         if (fulfillments.isEmpty()) return ResponseEntity.notFound().build();
         var fulfillmentResources = fulfillments.stream()
