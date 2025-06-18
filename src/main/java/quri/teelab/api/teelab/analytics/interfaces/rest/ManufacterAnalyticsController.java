@@ -13,6 +13,8 @@ import quri.teelab.api.teelab.analytics.domain.model.queries.GetManufacturerAnal
 import quri.teelab.api.teelab.analytics.interfaces.rest.resources.ManufacturerAnalyticsResource;
 import quri.teelab.api.teelab.analytics.interfaces.rest.transform.ManufacturerAnalyticsResourceFromEntityAssembler;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/analytics")
 public class ManufacterAnalyticsController {
@@ -39,7 +41,13 @@ public class ManufacterAnalyticsController {
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<ManufacturerAnalyticsResource> getManufacturerAnalytics(@PathVariable String userId) {
-        var query = new GetManufacturerAnalyticsByUserIdQuery(userId);
+        UUID uuid;
+        try {
+            uuid = UUID.fromString(userId);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        var query = new GetManufacturerAnalyticsByUserIdQuery(uuid);
         var analytics = manufacturerAnalyticsQueryService.handle(query);
         if (analytics == null) {
             return ResponseEntity.notFound().build();

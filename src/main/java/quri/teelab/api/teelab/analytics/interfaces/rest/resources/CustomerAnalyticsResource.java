@@ -24,4 +24,3 @@ public class CustomerAnalyticsResource {
     public int getCompleted() { return completed; }
     public String getId() { return id; }
 }
-

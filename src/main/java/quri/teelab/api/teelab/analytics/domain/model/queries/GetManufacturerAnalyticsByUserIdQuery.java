@@ -1,14 +1,15 @@
 package quri.teelab.api.teelab.analytics.domain.model.queries;
 
-public class GetManufacturerAnalyticsByUserIdQuery {
-    private final String userId;
+import java.util.UUID;
 
-    public GetManufacturerAnalyticsByUserIdQuery(String userId) {
+public class GetManufacturerAnalyticsByUserIdQuery {
+    private final UUID userId;
+
+    public GetManufacturerAnalyticsByUserIdQuery(UUID userId) {
         this.userId = userId;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 }
-
