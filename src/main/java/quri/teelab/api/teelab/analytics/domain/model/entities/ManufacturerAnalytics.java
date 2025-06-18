@@ -1,14 +1,21 @@
 package quri.teelab.api.teelab.analytics.domain.model.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EmbeddedId;
 import quri.teelab.api.teelab.analytics.domain.model.valueobjects.AnalyticsId;
 
+@Entity
 public class ManufacturerAnalytics {
-    private final AnalyticsId id;
-    private final String userId;
-    private final int totalOrdersReceived;
-    private final int pendingFulfillments;
-    private final int producedProjects;
-    private final double avgFulfillmentTimeDays;
+    @EmbeddedId
+    private AnalyticsId id;
+    private String userId;
+    private int totalOrdersReceived;
+    private int pendingFulfillments;
+    private int producedProjects;
+    private double avgFulfillmentTimeDays;
+
+    // Constructor sin argumentos requerido por JPA
+    protected ManufacturerAnalytics() {}
 
     public ManufacturerAnalytics(AnalyticsId id, String userId, int totalOrdersReceived, int pendingFulfillments, int producedProjects, double avgFulfillmentTimeDays) {
         this.id = id;

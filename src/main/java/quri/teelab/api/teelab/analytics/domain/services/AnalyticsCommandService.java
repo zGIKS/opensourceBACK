@@ -7,7 +7,7 @@ import quri.teelab.api.teelab.analytics.domain.model.entities.CustomerAnalytics;
  * Query Service for analytics domain logic.
  * Handles read-only business operations for analytics.
  */
-public class AnalyticsQueryService {
+public class AnalyticsCommandService {
     /**
      * Calculates the fulfillment rate for a manufacturer.
      * @param analytics ManufacturerAnalytics entity
