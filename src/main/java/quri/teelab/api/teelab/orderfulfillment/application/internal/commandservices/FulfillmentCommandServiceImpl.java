@@ -6,6 +6,8 @@ import quri.teelab.api.teelab.orderfulfillment.domain.model.commands.CreateFulfi
 import quri.teelab.api.teelab.orderfulfillment.domain.services.FulfillmentCommandService;
 import quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence.jpa.repositories.FulfillmentRepository;
 
+import java.util.UUID;
+
 @Service
 public class FulfillmentCommandServiceImpl implements FulfillmentCommandService {
     
@@ -15,10 +17,9 @@ public class FulfillmentCommandServiceImpl implements FulfillmentCommandService 
         this.fulfillmentRepository = fulfillmentRepository;
     }
       @Override
-    public Long handle(CreateFulfillmentCommand command) {
+    public UUID handle(CreateFulfillmentCommand command) {
         var fulfillment = new Fulfillment(command);
-        
         fulfillmentRepository.save(fulfillment);
-        return fulfillment.getId();
+        return fulfillment.getId().fulfillmentId();
     }
 }
