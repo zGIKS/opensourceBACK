@@ -3,7 +3,8 @@ package quri.teelab.api.teelab.orderfulfillment.infrastructure.persistence.jpa.r
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import quri.teelab.api.teelab.orderfulfillment.domain.model.aggregates.Fulfillment;
+import quri.teelab.api.teelab.orderfulfillment.domain.model.valueobjects.FulfillmentId;
 
 @Repository
-public interface FulfillmentRepository extends JpaRepository<Fulfillment, Long> {
+public interface FulfillmentRepository extends JpaRepository<Fulfillment, FulfillmentId> {
 }

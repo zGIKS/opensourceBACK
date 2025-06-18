@@ -39,9 +39,11 @@ public class FulfillmentsController {
             @ApiResponse(responseCode = "200", description = "Fulfillments found"),
             @ApiResponse(responseCode = "404", description = "Fulfillments not found")
     })
-    public ResponseEntity<List<FulfillmentResource>> getAllFulfillmentsByManufacturerId() {
+    public ResponseEntity<List<FulfillmentResource>> getAllFulfillmentsByManufacturerId(@PathVariable String manufacturerId) {
+
+        var getAllFulfillmentsByManufacturerIdQuery = new GetAllFulfillmentsByManufacturerIdQuery(manufacturerId);
         // TODO: Create a transform resource to get manufacturerId from request parameters
-        var fulfillments = fulfillmentQueryService.handle(new GetAllFulfillmentsByManufacturerIdQuery());
+        var fulfillments = fulfillmentQueryService.handle(getAllFulfillmentsByManufacturerIdQuery);
         if (fulfillments.isEmpty()) return ResponseEntity.notFound().build();
         var fulfillmentResources = fulfillments.stream()
                 .map(FulfillmentResourceFromEntityAssembler::toResourceFromEntity)

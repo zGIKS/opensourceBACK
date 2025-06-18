@@ -14,11 +14,6 @@ import java.util.UUID;
 @Table(name = "manufacturers")
 public class Manufacturer extends AuditableAbstractAggregateRoot<Manufacturer> {
 
-    @EmbeddedId
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", nullable = false, updatable = false)
-    private ManufacturerId id;
-
     @Embedded
     @Column(name = "user_id", nullable = false)
     private UserId userId;
