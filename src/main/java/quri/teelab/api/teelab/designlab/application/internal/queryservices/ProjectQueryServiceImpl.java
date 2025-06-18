@@ -26,9 +26,7 @@ public class ProjectQueryServiceImpl implements ProjectQueryService {
         }
 
         // Fetch all projects for the given User ID
-        var userId = new UserId(query.userId());
-
-        var projects = projectRepository.findAllByUserId(userId);
+        var projects = projectRepository.findAllByUserId(query.userId());
         if (projects.isEmpty()) {
             return List.of(); // Return an empty list if no projects are found
         }
