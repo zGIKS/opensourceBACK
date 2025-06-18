@@ -1,6 +1,7 @@
 package quri.teelab.api.teelab.designlab.domain.model.aggregates;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,6 +14,7 @@ import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 import java.util.*;
 
 @Entity
+@Getter
 @Table(name = "projects")
 public class Project {
     @EmbeddedId
