@@ -17,7 +17,9 @@ public class FulfillmentQueryServiceImpl implements FulfillmentQueryService {
 
     public FulfillmentQueryServiceImpl(FulfillmentRepository fulfillmentRepository) {
         this.fulfillmentRepository = fulfillmentRepository;
-    }    @Override
+    }
+
+    @Override
     public List<Fulfillment> handle(GetAllFulfillmentsByManufacturerIdQuery query) {
         return fulfillmentRepository.findByManufacturer_Id(query.manufacturerId().value());
     }

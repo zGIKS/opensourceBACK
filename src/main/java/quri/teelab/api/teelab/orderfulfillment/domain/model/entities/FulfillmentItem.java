@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "fulfillment_items",
-       indexes = {@Index(name = "idx_fulfillment_items_product_id", columnList = "product_id")})
+        indexes = {@Index(name = "idx_fulfillment_items_product_id", columnList = "product_id")})
 public class FulfillmentItem {
     @EmbeddedId
     private FulfillmentItemId id;
@@ -23,12 +23,15 @@ public class FulfillmentItem {
     private ProductId productId;
 
     @Column(name = "quantity", nullable = false)
-    private int quantity;    @Enumerated(EnumType.STRING)
+    private int quantity;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
     private FulfillmentItemStatus status;
-    
+
     @Column(name = "fulfillment_id", nullable = false, columnDefinition = "UUID", insertable = false, updatable = false)
-    private UUID fulfillmentId;    public FulfillmentItem(FulfillmentItemId id, ProductId productId, int quantity, FulfillmentItemStatus status, UUID fulfillmentId) {
+    private UUID fulfillmentId;
+
+    public FulfillmentItem(FulfillmentItemId id, ProductId productId, int quantity, FulfillmentItemStatus status, UUID fulfillmentId) {
         this.id = id;
         this.productId = productId;
         this.quantity = quantity;

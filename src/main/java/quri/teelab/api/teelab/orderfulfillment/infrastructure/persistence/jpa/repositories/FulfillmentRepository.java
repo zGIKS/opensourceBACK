@@ -13,5 +13,6 @@ import java.util.UUID;
 @Repository
 public interface FulfillmentRepository extends JpaRepository<Fulfillment, UUID> {
     List<Fulfillment> findByManufacturer_Id(UUID manufacturerId);
+
     Optional<Fulfillment> findByOrderId_Value(UUID orderId);
 }

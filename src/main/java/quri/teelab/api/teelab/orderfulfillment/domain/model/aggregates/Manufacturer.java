@@ -16,14 +16,16 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "manufacturers")
-public class Manufacturer extends AuditableAbstractAggregateRoot<Manufacturer> {    @Embedded
+public class Manufacturer extends AuditableAbstractAggregateRoot<Manufacturer> {
+    @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "user_id", nullable = false, columnDefinition = "UUID", unique = true))
     private UserId userId;
 
     @Column(name = "name", nullable = false, length = 100)
-    private String name;    @Embedded
+    private String name;
+    @Embedded
     private Address address;
-      @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Fulfillment> fulfillments = new ArrayList<>();
 
     public Manufacturer() {
@@ -34,23 +36,26 @@ public class Manufacturer extends AuditableAbstractAggregateRoot<Manufacturer> {
         this.userId = new UserId(UUID.fromString(userId));
         this.name = name;
         this.address = new Address(address, city, country, state, zip);
-    }    public void updateInformation(String name, String address, String city, String country, String state, String zip) {
+    }
+
+    public void updateInformation(String name, String address, String city, String country, String state, String zip) {
         this.name = name;
         this.address = new Address(address, city, country, state, zip);
     }
-    
+
     public void addFulfillment(Fulfillment fulfillment) {
         fulfillments.add(fulfillment);
     }
-    
+
     public void removeFulfillment(Fulfillment fulfillment) {
         fulfillments.remove(fulfillment);
     }
-    
+
     public List<Fulfillment> getFulfillments() {
         return new ArrayList<>(fulfillments);
     }
-      public Fulfillment createFulfillment(OrderId orderId, FulfillmentStatus status) {
+
+    public Fulfillment createFulfillment(OrderId orderId, FulfillmentStatus status) {
         Fulfillment fulfillment = new Fulfillment(orderId, status, null, null, this);
         // The bidirectional relationship is maintained in the Fulfillment constructor
         return fulfillment;

@@ -29,16 +29,11 @@ public class ManufacturersController {
 
     @GetMapping
     @Operation(summary = "Get all manufacturers", description = "Get all manufacturers")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Manufacturers found"),
-            @ApiResponse(responseCode = "404", description = "Manufacturers not found")
-    })
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Manufacturers found"), @ApiResponse(responseCode = "404", description = "Manufacturers not found")})
     public ResponseEntity<List<ManufacturerResource>> getAllManufacturers() {
         var manufacturers = manufacturerQueryService.handle(new GetAllManufacturersQuery());
         if (manufacturers.isEmpty()) return ResponseEntity.notFound().build();
-        var manufacturerResources = manufacturers.stream()
-                .map(ManufacturerResourceFromEntityAssembler::toResourceFromEntity)
-                .toList();
+        var manufacturerResources = manufacturers.stream().map(ManufacturerResourceFromEntityAssembler::toResourceFromEntity).toList();
         return ResponseEntity.ok(manufacturerResources);
     }
 }

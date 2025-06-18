@@ -9,12 +9,12 @@ import static io.github.encryptorcode.pluralize.Pluralize.pluralize;
 
 /**
  * SnakeCase Physical Naming Strategy
- * @summary
- * This class is used to convert the table names and column names to snake case.
+ *
+ * @summary This class is used to convert the table names and column names to snake case.
  * It also pluralizes the table names.
  * It implements the PhysicalNamingStrategy interface from Hibernate.
- * @since 1.0
  * @see PhysicalNamingStrategy
+ * @since 1.0
  */
 public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements PhysicalNamingStrategy {
     @Override
@@ -24,7 +24,8 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
 
     /**
      * Converts the Schema Name to Snake Case
-     * @param identifier schema name
+     *
+     * @param identifier      schema name
      * @param jdbcEnvironment jdbc environment
      * @return Snake Case Schema Name
      */
@@ -35,7 +36,8 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
 
     /**
      * Converts the Table Name to Snake Case and Pluralizes it
-     * @param identifier table name
+     *
+     * @param identifier      table name
      * @param jdbcEnvironment jdbc environment
      * @return Snake Case and Pluralized Table Name
      */
@@ -46,7 +48,8 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
 
     /**
      * Converts the Sequence Name to Snake Case
-     * @param identifier sequence name
+     *
+     * @param identifier      sequence name
      * @param jdbcEnvironment jdbc environment
      * @return Snake Case Sequence Name
      */
@@ -57,7 +60,8 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
 
     /**
      * Converts the Column Name to Snake Case
-     * @param identifier column name
+     *
+     * @param identifier      column name
      * @param jdbcEnvironment jdbc environment
      * @return Snake Case Column Name
      */
@@ -68,6 +72,7 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
 
     /**
      * Converts the Identifier to Snake Case
+     *
      * @param identifier object identifier
      * @return Snake Case Identifier
      */
@@ -84,6 +89,7 @@ public class SnakeCaseWithPluralizedTablePhysicalNamingStrategy implements Physi
 
     /**
      * Pluralizes the Identifier
+     *
      * @param identifier object identifier
      * @return Pluralized Identifier
      */
