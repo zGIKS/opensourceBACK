@@ -44,20 +44,20 @@ public class Fulfillment extends AuditableAbstractAggregateRoot<Fulfillment> {
         // Default constructor for JPA
     }
 
-    public Fulfillment(String orderId, FulfillmentStatus status, Date receivedDate, Date shippedDate, String manufacturerId) {
-        this.orderId = new OrderId(UUID.fromString(orderId));
+    public Fulfillment(OrderId orderId, FulfillmentStatus status, Date receivedDate, Date shippedDate, ManufacturerId manufacturerId) {
+        this.orderId = orderId;
         this.status = status;
         this.receivedDate = receivedDate;
         this.shippedDate = shippedDate;
-        this.manufacturerId = new ManufacturerId(UUID.fromString(manufacturerId));
+        this.manufacturerId = manufacturerId;
     }    // Constructor for creating new fulfillments (status is "PENDING", receivedDate and shippedDate are null by default)
 
     public Fulfillment(CreateFulfillmentCommand command) {
-        this.orderId = new OrderId(UUID.fromString(command.orderId()));
+        this.orderId = command.orderId();
         this.status = FulfillmentStatus.PENDING; // Automatically set to "PENDING" for new fulfillments
         this.receivedDate = null; // Automatically set to null for new fulfillments (not yet received by manufacturer)
         this.shippedDate = null; // Automatically set to null for new fulfillments
-        this.manufacturerId = new ManufacturerId(UUID.fromString(command.manufacturerId()));
+        this.manufacturerId = command.manufacturerId();
     }
 
     public void updateStatus(FulfillmentStatus status) {
