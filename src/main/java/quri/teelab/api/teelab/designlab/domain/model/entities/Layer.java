@@ -12,6 +12,11 @@ import java.util.Date;
 @DiscriminatorColumn(name = "layer_type", discriminatorType = DiscriminatorType.STRING)
 @Getter
 public abstract class Layer {
+    private final int DEFAULT_X_POSITION = 0;
+    private final int DEFAULT_Y_POSITION = 0;
+    private final int DEFAULT_Z_INDEX = 0;
+    private final float DEFAULT_OPACITY = 1;
+
     @EmbeddedId
     private LayerId id;
 
@@ -41,17 +46,16 @@ public abstract class Layer {
 
     protected Layer() {}
 
-    public Layer(LayerId id, int x, int y, int z, Float opacity, boolean isVisible, LayerType type) {
+    public Layer(LayerId id, LayerType type) {
         this.id = id;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.opacity = opacity;
-        this.isVisible = isVisible;
+        this.x = DEFAULT_X_POSITION;
+        this.y = DEFAULT_Y_POSITION;
+        this.z = DEFAULT_Z_INDEX;
+        this.opacity = DEFAULT_OPACITY;
+        this.isVisible = true;
         this.type = type;
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }
 
-    public LayerId getId() { return id; }
 }

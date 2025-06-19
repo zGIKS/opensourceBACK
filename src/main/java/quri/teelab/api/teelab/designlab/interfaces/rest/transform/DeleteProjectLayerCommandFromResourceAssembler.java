@@ -1,8 +1,8 @@
 package quri.teelab.api.teelab.designlab.interfaces.rest.transform;
 
 import quri.teelab.api.teelab.designlab.domain.model.commands.DeleteProjectLayerCommand;
-
-import java.util.UUID;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
 
 public class DeleteProjectLayerCommandFromResourceAssembler {
     public static DeleteProjectLayerCommand toCommandFromResource(String projectId, String layerId) {
@@ -14,8 +14,8 @@ public class DeleteProjectLayerCommandFromResourceAssembler {
         }
 
         return new DeleteProjectLayerCommand(
-                UUID.fromString(projectId),
-                UUID.fromString(layerId)
+                ProjectId.of(projectId),
+                LayerId.of(layerId)
         );
 
     }

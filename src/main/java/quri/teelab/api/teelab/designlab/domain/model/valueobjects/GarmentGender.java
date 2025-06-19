@@ -1,6 +1,8 @@
 package quri.teelab.api.teelab.designlab.domain.model.valueobjects;
 
-public enum LayerType {
-    IMAGE,
-    TEXT,
+public enum GarmentGender {
+    MEN,
+    WOMEN,
+    UNISEX,
+    KIDS,
 }

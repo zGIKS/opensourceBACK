@@ -2,7 +2,11 @@ package quri.teelab.api.teelab.designlab.application.internal.commandservices;
 
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.designlab.domain.model.aggregates.Project;
+import quri.teelab.api.teelab.designlab.domain.model.commands.CreateProjectCommand;
+import quri.teelab.api.teelab.designlab.domain.model.commands.CreateTextLayerCommand;
 import quri.teelab.api.teelab.designlab.domain.model.commands.DeleteProjectLayerCommand;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectCommandService;
 import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.LayerRepository;
 import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.ProjectRepository;
@@ -20,7 +24,7 @@ public class ProjectCommandServiceImpl implements ProjectCommandService {
     }
 
     @Override
-    public UUID handle(DeleteProjectLayerCommand command) {
+    public LayerId handle(DeleteProjectLayerCommand command) {
         var layerId = command.layerId();
 
         if (!layerRepository.existsById(command.layerId())) {
@@ -44,5 +48,20 @@ public class ProjectCommandServiceImpl implements ProjectCommandService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete project with ID " + command.projectId(), e);
         }
+    }
+
+    @Override
+    public ProjectId handle(CreateProjectCommand command) {
+        // Here should be a validation for the user id
+
+        var project = new Project(command);
+
+        try {
+            projectRepository.save(project);
+            return project.getId();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create project", e);
+        }
+
     }
 }

@@ -19,8 +19,8 @@ import java.util.UUID;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "/api/v1/products/{productId}/comments", produces = APPLICATION_JSON_VALUE)
-@Tag(name = "Comments", description = "Product Comments API")
+@RequestMapping(value = "/api/v1/catalogs/products", produces = APPLICATION_JSON_VALUE)
+@Tag(name = "Product Catalog")
 public class CommentsController {
 
     private final ProductCommandService productCommandService;
