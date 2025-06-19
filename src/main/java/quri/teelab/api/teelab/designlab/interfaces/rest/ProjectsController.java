@@ -1,14 +1,13 @@
 package quri.teelab.api.teelab.designlab.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import quri.teelab.api.teelab.designlab.domain.model.queries.GetAllProjectsByUserIdQuery;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectCommandService;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectQueryService;
+import quri.teelab.api.teelab.designlab.interfaces.rest.resources.CreateProjectResource;
 import quri.teelab.api.teelab.designlab.interfaces.rest.resources.ProjectResource;
 import quri.teelab.api.teelab.designlab.interfaces.rest.transform.ProjectResourceFromEntityAssembler;
 
@@ -38,5 +37,11 @@ public class ProjectsController {
         var projectsResource = projects.stream().map(ProjectResourceFromEntityAssembler::toResourceFromEntity).toList();
 
         return ResponseEntity.ok(projectsResource);
+    }
+
+    @PostMapping(value = "/create")2
+    public ResponseEntity<?> CreateProject(@RequestBody CreateProjectResource resource) {
+        
+        return ResponseEntity.status(501).body("Create Project functionality not implemented yet.");
     }
 }

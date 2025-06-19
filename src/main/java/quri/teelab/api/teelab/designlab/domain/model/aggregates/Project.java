@@ -6,10 +6,7 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import quri.teelab.api.teelab.designlab.domain.model.entities.Layer;
-import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
-import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
-import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectStatus;
-import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.*;
 
 import java.util.*;
 
@@ -23,6 +20,18 @@ public class Project {
     @Embedded
     private UserId userId;
 
+    @Embedded
+    @Enumerated(EnumType.STRING)
+    private GarmentColor garmentColor;
+
+    @Embedded
+    @Enumerated(EnumType.STRING)
+    private GarmentSize garmentSize;
+
+    @Embedded
+    @Enumerated(EnumType.STRING)
+    private GarmentGender garmentGender;
+
     private String title;
 
     @URL
@@ -32,9 +41,7 @@ public class Project {
     private ProjectStatus status;
 
     @OneToMany(
-        cascade = CascadeType.ALL,
-        orphanRemoval = true,
-        fetch = FetchType.LAZY
+        cascade = CascadeType.ALL
     )
     @JoinColumn(name = "project_id", referencedColumnName = "projectId")
     private List<Layer> layers = new ArrayList<>();
@@ -52,7 +59,7 @@ public class Project {
     // Default constructor required by JPA
     protected Project() {}
 
-    public Project(ProjectId id, UserId userId, String title, String previewUrl, ProjectStatus status) {
+    public Project(ProjectId id, UserId userId, String title, String previewUrl, ProjectStatus status, GarmentColor garmentColor, GarmentSize garmentSize, GarmentGender garmentGender) {
         this.id = id;
         this.userId = userId;
         this.title = title;
@@ -61,6 +68,9 @@ public class Project {
         this.layers = new ArrayList<>();
         this.createdAt = new Date();
         this.updatedAt = new Date();
+        this.garmentColor = garmentColor;
+        this.garmentSize = garmentSize;
+        this.garmentGender = garmentGender;
     }
 
     public ProjectId getId() { return id; }
