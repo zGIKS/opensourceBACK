@@ -2,13 +2,16 @@ package quri.teelab.api.teelab.designlab.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import quri.teelab.api.teelab.designlab.domain.model.queries.GetAllProjectsByUserIdQuery;
+import quri.teelab.api.teelab.designlab.domain.model.queries.GetProjectByIdQuery;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectCommandService;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectQueryService;
 import quri.teelab.api.teelab.designlab.interfaces.rest.resources.CreateProjectResource;
 import quri.teelab.api.teelab.designlab.interfaces.rest.resources.ProjectResource;
+import quri.teelab.api.teelab.designlab.interfaces.rest.transform.CreateProjectCommandFromResourceAssembler;
 import quri.teelab.api.teelab.designlab.interfaces.rest.transform.ProjectResourceFromEntityAssembler;
 
 import java.util.List;
@@ -39,9 +42,25 @@ public class ProjectsController {
         return ResponseEntity.ok(projectsResource);
     }
 
-    @PostMapping(value = "/create")2
+    @PutMapping(value = "/create")
     public ResponseEntity<?> CreateProject(@RequestBody CreateProjectResource resource) {
-        
-        return ResponseEntity.status(501).body("Create Project functionality not implemented yet.");
+        var createProjectCommand = CreateProjectCommandFromResourceAssembler.CreateProjectCommandFromResourceAssembler(resource);
+
+        var projectId = projectCommandService.handle(createProjectCommand);
+
+        if (projectId == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        var getProjectByIdQuery = new GetProjectByIdQuery(projectId);
+        var project = projectQueryService.handle(getProjectByIdQuery);
+
+        if (project == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        var projectResource = ProjectResourceFromEntityAssembler.toResourceFromEntity(project);
+
+        return new ResponseEntity<>(projectResource, HttpStatus.CREATED);
     }
 }

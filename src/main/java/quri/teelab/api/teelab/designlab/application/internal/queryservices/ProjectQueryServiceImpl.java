@@ -3,6 +3,7 @@ package quri.teelab.api.teelab.designlab.application.internal.queryservices;
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.designlab.domain.model.aggregates.Project;
 import quri.teelab.api.teelab.designlab.domain.model.queries.GetAllProjectsByUserIdQuery;
+import quri.teelab.api.teelab.designlab.domain.model.queries.GetProjectByIdQuery;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectQueryService;
 import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.ProjectRepository;
@@ -34,5 +35,21 @@ public class ProjectQueryServiceImpl implements ProjectQueryService {
         // Return the list of projects
         return projects;
     }
+
+    public Project handle(GetProjectByIdQuery query) {
+        // Validate if there is a Project With the given ID
+        if (!projectRepository.existsById(query.projectId())) {
+            System.out.println("Project with ID " + query.projectId() + " does not exist.");
+            throw new IllegalArgumentException("Project with ID " + query.projectId() + " does not exist.");
+        }
+
+        // Fetch the project by ID
+        var project = projectRepository.findById(query.projectId())
+                .orElseThrow(() -> new IllegalArgumentException("Project with ID " + query.projectId() + " does not exist."));
+
+        // Return the project
+        return project;
+    }
+
 
 }

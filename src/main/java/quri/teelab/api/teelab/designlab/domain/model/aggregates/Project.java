@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import quri.teelab.api.teelab.designlab.domain.model.commands.CreateProjectCommand;
 import quri.teelab.api.teelab.designlab.domain.model.entities.Layer;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.*;
 
@@ -20,15 +21,12 @@ public class Project {
     @Embedded
     private UserId userId;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     private GarmentColor garmentColor;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     private GarmentSize garmentSize;
 
-    @Embedded
     @Enumerated(EnumType.STRING)
     private GarmentGender garmentGender;
 
@@ -73,14 +71,21 @@ public class Project {
         this.garmentGender = garmentGender;
     }
 
-    public ProjectId getId() { return id; }
-    public UserId getUserId() { return userId; }
-    public String getTitle() { return title; }
-    public String getPreviewUrl() { return previewUrl; }
-    public ProjectStatus getStatus() { return status; }
+    public Project(CreateProjectCommand command) {
+        this.id = new ProjectId(UUID.randomUUID());
+        this.userId = command.userId();
+        this.title = command.title();
+        this.previewUrl = null; // Default value, can be set later
+        this.status = ProjectStatus.BLUEPRINT; // Default status
+        this.layers = new ArrayList<>();
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+        this.garmentColor = command.garmentColor();
+        this.garmentSize = command.garmentSize();
+        this.garmentGender = command.garmentGender();
+    }
+
     public List<Layer> getLayers() { return Collections.unmodifiableList(layers); }
-    public Date getCreatedAt() { return createdAt; }
-    public Date getUpdatedAt() { return updatedAt; }
 
     public void addLayer(Layer layer) {
         layers.add(layer);
@@ -95,5 +100,4 @@ public class Project {
         return layers.stream().anyMatch(layer -> layer.getId().equals(layerIdToCheck));
     }
 
-    // ...otros métodos de negocio...
 }

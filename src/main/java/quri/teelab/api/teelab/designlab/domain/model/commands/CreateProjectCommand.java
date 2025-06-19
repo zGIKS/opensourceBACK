@@ -1,12 +1,14 @@
 package quri.teelab.api.teelab.designlab.domain.model.commands;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.GarmentColor;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.GarmentGender;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.GarmentSize;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 
 public record CreateProjectCommand(UserId userId,
                                    String title,
                                    GarmentColor garmentColor,
-                                      String garmentGender,
-                                        String garmentSize
+                                      GarmentGender garmentGender,
+                                        GarmentSize garmentSize
 
 
 ) {
