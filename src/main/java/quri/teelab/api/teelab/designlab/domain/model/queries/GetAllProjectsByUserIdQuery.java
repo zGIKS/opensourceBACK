@@ -1,8 +1,8 @@
 package quri.teelab.api.teelab.designlab.domain.model.queries;
 
-import java.util.UUID;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 
-public record GetAllProjectsByUserIdQuery(UUID userId) {
+public record GetAllProjectsByUserIdQuery(UserId userId) {
     public GetAllProjectsByUserIdQuery {
         if (userId == null) {
             throw new IllegalArgumentException("User ID cannot be null");

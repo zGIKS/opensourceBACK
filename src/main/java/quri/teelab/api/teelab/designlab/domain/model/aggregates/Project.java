@@ -95,9 +95,8 @@ public class Project {
         layers.removeIf(layer -> layer.getId().equals(layerId));
     }
 
-    public boolean hasLayerWithId(UUID layerId) {
-        var layerIdToCheck = new LayerId(layerId);
-        return layers.stream().anyMatch(layer -> layer.getId().equals(layerIdToCheck));
+    public boolean hasLayerWithId(LayerId layerId) {
+        return layers.stream().anyMatch(layer -> layer.getId().equals(layerId));
     }
 
 }

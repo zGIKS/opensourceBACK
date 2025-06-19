@@ -1,21 +1,20 @@
 package quri.teelab.api.teelab.designlab.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import quri.teelab.api.teelab.designlab.domain.model.queries.GetAllProjectsByUserIdQuery;
 import quri.teelab.api.teelab.designlab.domain.model.queries.GetProjectByIdQuery;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectCommandService;
 import quri.teelab.api.teelab.designlab.domain.services.ProjectQueryService;
 import quri.teelab.api.teelab.designlab.interfaces.rest.resources.CreateProjectResource;
 import quri.teelab.api.teelab.designlab.interfaces.rest.resources.ProjectResource;
 import quri.teelab.api.teelab.designlab.interfaces.rest.transform.CreateProjectCommandFromResourceAssembler;
 import quri.teelab.api.teelab.designlab.interfaces.rest.transform.ProjectResourceFromEntityAssembler;
-
 import java.util.List;
-import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -33,16 +32,14 @@ public class ProjectsController {
 
     @GetMapping(value = "/users/{userId}")
     public ResponseEntity<List<ProjectResource>> getAllProjectsByUserIdQuery(@PathVariable String userId) {
-        var getAllProjectsByUserIdQuery = new GetAllProjectsByUserIdQuery(UUID.fromString(userId));
+        var getAllProjectsByUserIdQuery = new GetAllProjectsByUserIdQuery(UserId.of(userId));
 
         var projects = projectQueryService.handle(getAllProjectsByUserIdQuery);
 
         var projectsResource = projects.stream().map(ProjectResourceFromEntityAssembler::toResourceFromEntity).toList();
 
         return ResponseEntity.ok(projectsResource);
-    }
-
-    @PutMapping(value = "/create")
+    }    @PutMapping(value = "/create")
     public ResponseEntity<?> CreateProject(@RequestBody CreateProjectResource resource) {
         var createProjectCommand = CreateProjectCommandFromResourceAssembler.CreateProjectCommandFromResourceAssembler(resource);
 
@@ -50,8 +47,7 @@ public class ProjectsController {
 
         if (projectId == null) {
             return ResponseEntity.badRequest().build();
-        }
-
+        }        // Create ProjectId value object instead of using UUID directly
         var getProjectByIdQuery = new GetProjectByIdQuery(projectId);
         var project = projectQueryService.handle(getProjectByIdQuery);
 

@@ -11,4 +11,12 @@ public record LayerId(UUID layerId) {
             throw new IllegalArgumentException("LayerId cannot be null");
         }
     }
+
+    public static LayerId of(String layerId) {
+        if (layerId == null || layerId.isBlank()) {
+            throw new IllegalArgumentException("Layer ID cannot be null or blank");
+        }
+        var uuid = UUID.fromString(layerId);
+        return new LayerId(uuid);
+    }
 }

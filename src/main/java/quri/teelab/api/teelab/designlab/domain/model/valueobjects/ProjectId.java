@@ -12,4 +12,13 @@ public record ProjectId(UUID projectId) {
             throw new IllegalArgumentException("Project ID cannot be null or empty");
         }
     }
+
+    public static ProjectId of(String projectId) {
+        if (projectId == null || projectId.isBlank()) {
+            throw new IllegalArgumentException("Project ID cannot be null or blank");
+        }
+        var uuid = UUID.fromString(projectId);
+
+        return new ProjectId(uuid);
+    }
 }
