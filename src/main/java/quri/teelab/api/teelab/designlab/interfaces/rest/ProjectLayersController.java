@@ -33,12 +33,11 @@ public class ProjectLayersController {
         this.layerCommandService = layerCommandService;
     }
 
-    @DeleteMapping("/{projectId}/layer/{layerId}")
-    @Operation(summary = "Delete Layer from Project", description = "Delete a layer from a project by its unique identifiers")
-    public ResponseEntity<?> deleteProjectLayerById(@PathVariable String projectId, @PathVariable String layerId) {
-        var command = DeleteProjectLayerCommandFromResourceAssembler.toCommandFromResource(projectId, layerId);
+    @DeleteMapping("/{projectId}/layers/{layerId}")
+    public ResponseEntity<?> DeleteProjectLayerById(@PathVariable String projectId, @PathVariable String layerId) {
+        var deleteProjectLayerCommand = DeleteProjectLayerCommandFromResourceAssembler.toCommandFromResource(projectId, layerId);
 
-        var deletedLayerId = projectCommandService.handle(command);
+        var deletedLayerId = projectCommandService.handle(deleteProjectLayerCommand);
 
         if (deletedLayerId == null) {
             return ResponseEntity.notFound().build();
