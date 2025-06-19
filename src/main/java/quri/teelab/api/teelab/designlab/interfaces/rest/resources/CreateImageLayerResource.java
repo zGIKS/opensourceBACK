@@ -1,7 +1,9 @@
 package quri.teelab.api.teelab.designlab.interfaces.rest.resources;
 
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
+
 public record CreateImageLayerResource
-        (String projectId, String imageUrl, Float width, Float height)
+        (ProjectId projectId, String imageUrl, Float width, Float height)
 {
 
     public CreateImageLayerResource {

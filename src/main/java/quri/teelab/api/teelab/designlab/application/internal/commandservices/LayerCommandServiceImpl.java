@@ -23,12 +23,19 @@ public class LayerCommandServiceImpl implements LayerCommandService {
     public LayerId handle(CreateTextLayerCommand command) {
         LayerId layerId = new LayerId(UUID.randomUUID());
 
-        var project = projectRepository.findById(command.projectId());
-        if (project.isEmpty()) {
-            throw new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist.");
-        }
+        var project = projectRepository.
+                findById(command.projectId()).
+                orElseThrow(() -> new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist."));
+
         var layer = new TextLayer(command);
 
+        try {
+            project.addLayer(layer);
+            projectRepository.save(project);
+            return layerId;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create image layer", e);
+        }
     }
 
     @Override
@@ -37,7 +44,8 @@ public class LayerCommandServiceImpl implements LayerCommandService {
 
         // Here should be a validation for the user id
 
-        var project = projectRepository.findById(command.projectId())
+        var project = projectRepository
+                .findById(command.projectId())
                 .orElseThrow(() -> new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist."));
 
         var layer = new ImageLayer(command);

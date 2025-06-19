@@ -5,7 +5,7 @@ import quri.teelab.api.teelab.designlab.interfaces.rest.resources.CreateImageLay
 
 public class CreateImageLayerCommandFromResourceAssembler {
 
-    public  static CreateImageLayerCommand ToCommandFromResource (CreateImageLayerResource resource) {
-
+    public static CreateImageLayerCommand ToCommandFromResource(CreateImageLayerResource resource) {
+        return new CreateImageLayerCommand(resource.projectId(), resource.imageUrl(), resource.width(), resource.height());
     }
 }
