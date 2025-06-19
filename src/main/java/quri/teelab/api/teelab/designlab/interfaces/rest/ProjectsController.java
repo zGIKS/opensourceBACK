@@ -44,7 +44,7 @@ public class ProjectsController {
         return ResponseEntity.ok(projectsResource);
     }
 
-    @PutMapping(value = "/create")
+    @PostMapping(value = "/create")
     public ResponseEntity<?> CreateProject(@RequestBody CreateProjectResource resource) {
         var createProjectCommand = CreateProjectCommandFromResourceAssembler.CreateProjectCommandFromResourceAssembler(resource);
 

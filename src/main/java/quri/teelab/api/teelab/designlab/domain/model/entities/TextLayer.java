@@ -14,13 +14,25 @@ import java.util.UUID;
 @DiscriminatorValue("TEXT")
 @Getter
 public class TextLayer extends Layer {
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String text;
+
+    @Column(nullable = true)
     private String fontColor;
+
+    @Column(nullable = true)
     private String fontFamily;
+
+    @Column(nullable = true)
     private Integer fontSize;
+
+    @Column(nullable = true)
     private Boolean isBold;
+
+    @Column(nullable = true)
     private Boolean isItalic;
+
+    @Column(nullable = true)
     private Boolean isUnderlined;
 
     protected TextLayer() {

@@ -7,6 +7,7 @@ import quri.teelab.api.teelab.designlab.domain.model.entities.ImageLayer;
 import quri.teelab.api.teelab.designlab.domain.model.entities.TextLayer;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
 import quri.teelab.api.teelab.designlab.domain.services.LayerCommandService;
+import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.LayerRepository;
 import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.ProjectRepository;
 
 import java.util.UUID;
@@ -14,9 +15,11 @@ import java.util.UUID;
 @Service
 public class LayerCommandServiceImpl implements LayerCommandService {
     private final ProjectRepository projectRepository;
+    private final LayerRepository layerRepository;
 
-    public LayerCommandServiceImpl(ProjectRepository projectRepository) {
+    public LayerCommandServiceImpl(ProjectRepository projectRepository, LayerRepository layerRepository) {
         this.projectRepository = projectRepository;
+        this.layerRepository = layerRepository;
     }
 
     @Override
@@ -31,10 +34,10 @@ public class LayerCommandServiceImpl implements LayerCommandService {
 
         try {
             project.addLayer(layer);
-            projectRepository.save(project);
+            layerRepository.save(layer);
             return layerId;
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create image layer", e);
+            throw new RuntimeException("Failed to create text layer", e);
         }
     }
 
@@ -52,7 +55,7 @@ public class LayerCommandServiceImpl implements LayerCommandService {
 
         try {
             project.addLayer(layer);
-            projectRepository.save(project);
+            layerRepository.save(layer);
             return layerId;
         } catch (Exception e) {
             throw new RuntimeException("Failed to create image layer", e);

@@ -17,9 +17,11 @@ import java.util.UUID;
 @Getter
 public class ImageLayer extends Layer {
     @URL
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String imageUrl;
+    @Column(nullable = true)
     private Float width;
+    @Column(nullable = true)
     private Float height;
 
     protected ImageLayer() {

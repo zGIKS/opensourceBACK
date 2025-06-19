@@ -48,7 +48,7 @@ public class ProjectLayersController {
     }
 
 
-    @PostMapping(value = "/layers/texts")
+    @PostMapping(value = "/texts")
     public ResponseEntity<?> CreateProjectLayerText(@RequestBody CreateTextLayerResource resource) {
         var createTextLayerCommand = CreateTextLayerCommandFromResourceAssembler.ToCommandFromResource(resource);
 
@@ -71,7 +71,7 @@ public class ProjectLayersController {
         return new ResponseEntity<>(layerResource, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/layers/texts")
+    @PostMapping(value = "/images")
     public ResponseEntity<?> CreateProjectLayerText(@RequestBody CreateImageLayerResource resource) {
         var createImageLayerCommand = CreateImageLayerCommandFromResourceAssembler.ToCommandFromResource(resource);
 
