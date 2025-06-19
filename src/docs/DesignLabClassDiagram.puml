@@ -1,0 +1,148 @@
+@startuml
+
+package "Design Lab Bounded Context" {
+
+    package "Interfaces Layer" {
+        class ProjectResource {}
+        class ProjectResourceFromEntityAssembler {}
+        class ProjectController {}
+    }
+
+    package "Application Layer" {
+        class ProjectCommandServiceImpl {}
+        class ProjectQueryServiceImpl {}
+    }
+
+    package "Infrastructure Layer" {
+        interface ProjectRepository {
+        }
+    }
+
+    package "Domain Layer" {
+
+        package "Services" {
+            interface ProjectCommandService {
+            }
+
+            interface ProjectQueryService {
+            }
+        }
+
+        package "Value Objects" {
+            enum ProjectStatus {
+                Blueprint
+                Garment
+                Template
+            }
+
+            enum GarmentGender {
+                MEN
+                WOMEN
+                UNISEX
+                KIDS
+            }
+
+            enum GarmentSize {
+                XS
+                S
+                M
+                L
+                XL
+                XXL
+            }
+
+            enum LayerType {
+                IMAGE
+                TEXT
+            }
+
+            enum GarmentColor {
+                BLACK
+                GRAY
+                LIGHT_GRAY
+                WHITE
+                RED
+                PINK
+                LIGHT_PURPLE
+                PURPLE
+                LIGHT_BLUE
+                CYAN
+                SKY_BLUE
+                BLUE
+                GREEN
+                LIGHT_GREEN
+                YELLOW
+                DARK_YELLOW
+                ---
+                EGarmentColor Value
+                String ToHexCode()
+            }
+
+            class ProjectId {
+                UUID value
+            }
+            class UserId {
+                UUID value
+            }
+        }
+
+        class "Project" {
+            ProjectId id
+            UserId userId
+            String title
+            String previewImageUrl
+            ProjectStatus status
+            ProjectGender gender
+            GarmentColor garmentColor
+            GarmentSize size
+            Date createdAt
+            Date lastModifiedAt
+            List<Layer> layers
+        }
+
+        abstract class "Layer" {
+            LayerId id
+            int x
+            int y
+            int z
+            int opacity
+            boolean isVisible
+            LayerType type
+            Date createdAt
+            Date lastModifiedAt
+        }
+
+        class "ImageLayer" extends "Layer" {
+            String imageUrl
+            int width
+            int height
+        }
+
+        class "TextLayer" extends "Layer" {
+            String text
+            int fontSize
+            String fontColor
+            String fontFamily
+            boolean isBold
+            boolean isItalic
+            boolean isUnderlined
+        }
+
+        Project "1" *-- "0..*" Layer : contains >
+    }
+    Project --> ProjectId
+    Project --> UserId
+    Project --> GarmentColor
+    Project --> GarmentSize
+    Project --> ProjectStatus
+    Project --> GarmentGender
+
+    Layer --> LayerType
+
+    ProjectCommandServiceImpl ..|> ProjectCommandService
+    ProjectQueryServiceImpl ..|> ProjectQueryService
+    ProjectController -down-> ProjectResource : uses >
+    ProjectController --> ProjectCommandService
+
+}
+@enduml
