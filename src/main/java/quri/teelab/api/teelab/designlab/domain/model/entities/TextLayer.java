@@ -38,17 +38,6 @@ public class TextLayer extends Layer {
     protected TextLayer() {
     }
 
-    public TextLayer(LayerId id, LayerType type, String text, String fontColor, String fontFamily, Integer fontSize, Boolean isBold, Boolean isItalic, Boolean isUnderlined) {
-        super(id, type);
-        this.text = text;
-        this.fontColor = fontColor;
-        this.fontFamily = fontFamily;
-        this.fontSize = fontSize;
-        this.isBold = isBold;
-        this.isItalic = isItalic;
-        this.isUnderlined = isUnderlined;
-    }
-
     public TextLayer(CreateTextLayerCommand command) {
         super(new LayerId(UUID.randomUUID()), LayerType.TEXT);
         this.text = command.text();
@@ -59,5 +48,4 @@ public class TextLayer extends Layer {
         this.isItalic = command.isItalic();
         this.isUnderlined = command.isUnderlined();
     }
-
 }

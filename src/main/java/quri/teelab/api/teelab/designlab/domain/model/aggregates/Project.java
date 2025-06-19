@@ -91,6 +91,9 @@ public class Project {
     }
 
     public void addLayer(Layer layer) {
+        if (hasLayerWithId(layer.getId())) {
+            throw new IllegalArgumentException("Layer with ID " + layer.getId() + " already exists in project");
+        }
         layers.add(layer);
     }
 

@@ -27,6 +27,7 @@ public class LayerQueryServiceImpl implements LayerQueryService {
             System.out.println("Layer with ID " + query.layerId() + " does not exist.");
             throw new IllegalArgumentException("Layer with ID " + query.layerId() + " does not exist.");
         }
-        return null;
+
+        return layer;
     }
 }
