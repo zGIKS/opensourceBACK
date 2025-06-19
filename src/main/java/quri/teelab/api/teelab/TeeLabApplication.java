@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class TeeLabApplication {
 
     public static void main(String[] args) {
-        // Load environment variables from .env before starting Spring Boot
+        // Load environment variables from .env in project root before starting Spring Boot
         try {
             io.github.cdimascio.dotenv.Dotenv dotenv = io.github.cdimascio.dotenv.Dotenv.configure()
-                .directory("src/main/resources")
+                .directory(".")
                 .ignoreIfMalformed()
                 .ignoreIfMissing()
                 .load();
