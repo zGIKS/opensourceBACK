@@ -1,7 +1,9 @@
 package quri.teelab.api.teelab.designlab.domain.model.commands;
 
+import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
+
 public record CreateTextLayerCommand
-        (String projectId, String text, String fontColor, String fontFamily, Integer fontSize, Boolean isBold, Boolean isItalic, Boolean isUnderlined)
+        (ProjectId projectId, String text, String fontColor, String fontFamily, Integer fontSize, Boolean isBold, Boolean isItalic, Boolean isUnderlined)
 
 {
     public CreateTextLayerCommand {

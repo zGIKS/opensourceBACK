@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.designlab.domain.model.commands.CreateImageLayerCommand;
 import quri.teelab.api.teelab.designlab.domain.model.commands.CreateTextLayerCommand;
 import quri.teelab.api.teelab.designlab.domain.model.entities.ImageLayer;
+import quri.teelab.api.teelab.designlab.domain.model.entities.TextLayer;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
 import quri.teelab.api.teelab.designlab.domain.services.LayerCommandService;
 import quri.teelab.api.teelab.designlab.infrastructure.persistence.jpa.repositories.ProjectRepository;
@@ -22,6 +23,11 @@ public class LayerCommandServiceImpl implements LayerCommandService {
     public LayerId handle(CreateTextLayerCommand command) {
         LayerId layerId = new LayerId(UUID.randomUUID());
 
+        var project = projectRepository.findById(command.projectId());
+        if (project.isEmpty()) {
+            throw new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist.");
+        }
+        var layer = new TextLayer(command);
 
     }
 
@@ -34,7 +40,7 @@ public class LayerCommandServiceImpl implements LayerCommandService {
         var project = projectRepository.findById(command.projectId())
                 .orElseThrow(() -> new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist."));
 
-        var layer = new ImageLayer(layerId, command.imageUrl(), command.position(), command.size(), command.opacity());
+        var layer = new ImageLayer(command);
 
         try {
             project.addLayer(layer);
