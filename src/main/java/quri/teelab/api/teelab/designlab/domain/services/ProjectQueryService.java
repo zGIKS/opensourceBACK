@@ -7,7 +7,7 @@ import quri.teelab.api.teelab.designlab.domain.model.queries.GetProjectByIdQuery
 import java.util.List;
 
 public interface ProjectQueryService {
-
     List<Project> handle(GetAllProjectsByUserIdQuery query);
+
     Project handle(GetProjectByIdQuery query);
 }

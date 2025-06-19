@@ -1,17 +1,11 @@
 package quri.teelab.api.teelab.designlab.domain.model.commands;
+
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.GarmentColor;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.GarmentGender;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.GarmentSize;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.UserId;
 
-public record CreateProjectCommand(UserId userId,
-                                   String title,
-                                   GarmentColor garmentColor,
-                                      GarmentGender garmentGender,
-                                        GarmentSize garmentSize
-
-
-) {
+public record CreateProjectCommand(UserId userId, String title, GarmentColor garmentColor, GarmentGender garmentGender, GarmentSize garmentSize) {
     public CreateProjectCommand {
         if (userId == null) {
             throw new IllegalArgumentException("User ID cannot be null");

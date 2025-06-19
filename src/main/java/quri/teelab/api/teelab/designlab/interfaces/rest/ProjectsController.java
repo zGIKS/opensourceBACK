@@ -14,6 +14,7 @@ import quri.teelab.api.teelab.designlab.interfaces.rest.resources.CreateProjectR
 import quri.teelab.api.teelab.designlab.interfaces.rest.resources.ProjectResource;
 import quri.teelab.api.teelab.designlab.interfaces.rest.transform.CreateProjectCommandFromResourceAssembler;
 import quri.teelab.api.teelab.designlab.interfaces.rest.transform.ProjectResourceFromEntityAssembler;
+
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -39,7 +40,9 @@ public class ProjectsController {
         var projectsResource = projects.stream().map(ProjectResourceFromEntityAssembler::toResourceFromEntity).toList();
 
         return ResponseEntity.ok(projectsResource);
-    }    @PutMapping(value = "/create")
+    }
+
+    @PutMapping(value = "/create")
     public ResponseEntity<?> CreateProject(@RequestBody CreateProjectResource resource) {
         var createProjectCommand = CreateProjectCommandFromResourceAssembler.CreateProjectCommandFromResourceAssembler(resource);
 

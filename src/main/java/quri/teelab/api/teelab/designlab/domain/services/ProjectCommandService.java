@@ -9,5 +9,6 @@ import java.util.UUID;
 
 public interface ProjectCommandService {
     LayerId handle(DeleteProjectLayerCommand command);
+
     ProjectId handle(CreateProjectCommand command);
 }

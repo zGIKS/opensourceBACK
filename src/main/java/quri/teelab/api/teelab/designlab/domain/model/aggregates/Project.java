@@ -39,7 +39,7 @@ public class Project {
     private ProjectStatus status;
 
     @OneToMany(
-        cascade = CascadeType.ALL
+            cascade = CascadeType.ALL
     )
     @JoinColumn(name = "project_id", referencedColumnName = "projectId")
     private List<Layer> layers = new ArrayList<>();
@@ -55,7 +55,8 @@ public class Project {
     private Date updatedAt;
 
     // Default constructor required by JPA
-    protected Project() {}
+    protected Project() {
+    }
 
     public Project(ProjectId id, UserId userId, String title, String previewUrl, ProjectStatus status, GarmentColor garmentColor, GarmentSize garmentSize, GarmentGender garmentGender) {
         this.id = id;
@@ -85,7 +86,9 @@ public class Project {
         this.garmentGender = command.garmentGender();
     }
 
-    public List<Layer> getLayers() { return Collections.unmodifiableList(layers); }
+    public List<Layer> getLayers() {
+        return Collections.unmodifiableList(layers);
+    }
 
     public void addLayer(Layer layer) {
         layers.add(layer);
