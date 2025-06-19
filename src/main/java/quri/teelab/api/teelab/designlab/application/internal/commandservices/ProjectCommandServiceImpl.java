@@ -1,5 +1,6 @@
 package quri.teelab.api.teelab.designlab.application.internal.commandservices;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.designlab.domain.model.aggregates.Project;
 import quri.teelab.api.teelab.designlab.domain.model.commands.CreateProjectCommand;
@@ -24,33 +25,23 @@ public class ProjectCommandServiceImpl implements ProjectCommandService {
     }
 
     @Override
+    @Transactional
     public LayerId handle(DeleteProjectLayerCommand command) {
-        var layerId = command.layerId();
-
-        if (!layerRepository.existsById(command.layerId())) {
-            throw new IllegalArgumentException("Layer with ID " + command.layerId() + " does not exist.");
-        }
-
         var result = projectRepository.findById(command.projectId());
-
         if (result.isEmpty()) {
             throw new IllegalArgumentException("Project with ID " + command.projectId() + " does not exist.");
         }
-
         var project = result.get();
-        try {
-            if (project.hasLayerWithId(command.layerId())) {
-                // TODO: Ask if we should delete the layer from the project or just remove it from the repository
-                layerRepository.deleteById(command.layerId());
-                return command.layerId();
-            }
+        if (!project.hasLayerWithId(command.layerId())) {
             throw new IllegalArgumentException("Project with ID " + command.projectId() + " does not have a layer with ID " + command.layerId() + ".");
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to delete project with ID " + command.projectId(), e);
         }
+        project.removeLayer(command.layerId());
+        projectRepository.save(project);
+        return command.layerId();
     }
 
     @Override
+    @Transactional
     public ProjectId handle(CreateProjectCommand command) {
         // Here should be a validation for the user id
 
