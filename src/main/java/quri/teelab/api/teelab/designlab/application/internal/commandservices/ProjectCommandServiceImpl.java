@@ -3,6 +3,7 @@ package quri.teelab.api.teelab.designlab.application.internal.commandservices;
 import org.springframework.stereotype.Service;
 import quri.teelab.api.teelab.designlab.domain.model.aggregates.Project;
 import quri.teelab.api.teelab.designlab.domain.model.commands.CreateProjectCommand;
+import quri.teelab.api.teelab.designlab.domain.model.commands.CreateTextLayerCommand;
 import quri.teelab.api.teelab.designlab.domain.model.commands.DeleteProjectLayerCommand;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.LayerId;
 import quri.teelab.api.teelab.designlab.domain.model.valueobjects.ProjectId;
