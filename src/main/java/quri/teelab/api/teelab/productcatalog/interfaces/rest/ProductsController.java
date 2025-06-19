@@ -26,7 +26,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/api/v1/products", produces = APPLICATION_JSON_VALUE)
-@Tag(name = "Products", description = "Available Product Endpoints")
+@Tag(name = "Product Catalog")
 public class ProductsController {
 
     private final ProductCommandService productCommandService;

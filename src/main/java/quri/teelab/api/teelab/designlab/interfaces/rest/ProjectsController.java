@@ -19,7 +19,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/api/v1/projects", produces = APPLICATION_JSON_VALUE)
-@Tag(name = "Projects", description = "Available Project Endpoints")
+@Tag(name = "Design Lab", description = "Available Project Endpoints")
 public class ProjectsController {
     private final ProjectCommandService projectCommandService;
     private final ProjectQueryService projectQueryService;

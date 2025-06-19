@@ -1,6 +1,7 @@
 package quri.teelab.api.teelab.designlab.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/api/v1/projects/layers", produces = APPLICATION_JSON_VALUE)
+@Tag(name = "Design Lab", description = "Available Project Layer Endpoints")
 public class ProjectLayersController {
     private final ProjectCommandService projectCommandService;
     private final ProjectQueryService projectQueryService;
