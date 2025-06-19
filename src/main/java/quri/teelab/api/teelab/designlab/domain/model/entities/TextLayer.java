@@ -60,5 +60,4 @@ public class TextLayer extends Layer {
         this.isUnderlined = command.isUnderlined();
     }
 
-
 }
